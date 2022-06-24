@@ -5,11 +5,20 @@ from django.contrib.auth.models import User
 
 class fplUser(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    counter = models.IntegerField(default=0)
+    # counter = models.IntegerField(default=0)
 
     def __str__(self):
         return self.user.username
 
+
+class Token(models.Model):
+    t_id = models.IntegerField(verbose_name='Transaction ID', unique=True)
+    user = models.ForeignKey(fplUser, on_delete=models.SET_NULL, null=True)
+    # prediction = models.OneToOneField(Prediction, on_delete=models.SET_NULL, null=True, blank=True)
+    used = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f"{self.t_id} for {self.user}"
 
 
 class Prediction(models.Model):
@@ -19,6 +28,8 @@ class Prediction(models.Model):
     away_name = models.CharField(max_length=255)
     home_goals = models.CharField(max_length=2)
     away_goals = models.CharField(max_length=2)
+    token = models.OneToOneField(Token, on_delete=models.CASCADE, null=True, blank=True)
+    # token = models.IntegerField(verbose_name='Transaction ID', unique=True)
     is_correct = models.BooleanField(default=False)
     is_active = models.BooleanField(default=False)
     date_created = models.DateTimeField(auto_now_add=True)
@@ -28,11 +39,4 @@ class Prediction(models.Model):
 
 
 
-class Token(models.Model):
-    t_id = models.IntegerField(verbose_name='Transaction ID', unique=True)
-    user = models.ForeignKey(fplUser, on_delete=models.SET_NULL, null=True)
-    prediction = models.OneToOneField(Prediction, on_delete=models.SET_NULL, null=True, blank=True)
-    used = models.BooleanField(default=False)
 
-    def __str__(self):
-        return f"{self.t_id} for {self.user}"

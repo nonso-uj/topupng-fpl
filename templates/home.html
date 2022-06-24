@@ -13,8 +13,10 @@
     <h1>All Your Predictions</h1>
 
 {% for prediction in predictions %}
-
-    <p><b>{{prediction.home_name}}</b> {{prediction.fixture_id}} <img src="{{ prediction.home_logo }}" alt="club-logo"> {{ prediction.away_name }} {{ prediction.home_goals }} vs {{ prediction.away_goals }} {{ prediction.away_name }} <img src="{{ prediction.away_logo }}" alt="club-logo"></p>
+    <div>
+        <p>{{prediction.fixture_id}} <img src="{{ prediction.home_logo }}" alt="club-logo"> <b>{{prediction.home_name}}</b> {{ prediction.home_goals }} vs {{ prediction.away_goals }} <b>{{ prediction.away_name }}</b> <img src="{{ prediction.away_logo }}" alt="club-logo"></p>
+        <p>Prediction Status: {{ prediction.is_correct }}</p>
+    </div>
 <br><br>
 {% endfor %}
 

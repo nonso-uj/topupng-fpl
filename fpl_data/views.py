@@ -11,15 +11,18 @@ import os
 
 pwd = os.path.dirname(__file__)
 
+
+
+
 def scores_view(request):
     user = fplUser.objects.get(user=request.user)
     predictions = Prediction.objects.filter(user=user)
     fixtures = []
+    # logo name score vs score name logo
+    
     with open(pwd + '/json_data/fpl_data.txt','r') as f:
         raw_str = f.read()
-
     games = json.loads(raw_str)
-    # logo name score vs score name logo
     for game in games['response']:
         fixtures.append({
             'fixture_id' :game['fixture']['id'],
@@ -48,14 +51,12 @@ def scores_view(request):
 
 def predictor_view(request, pk):
     form = PredictionForm()
-
-
     fixture = []
+
+
     with open(pwd + '/json_data/fpl_data.txt','r') as f:
         raw_str = f.read()
-
     games = json.loads(raw_str)
-    # logo name score vs score name logo
     for game in games['response']:
         if game['fixture']['id'] == pk:
             fixture.append({
@@ -65,7 +66,6 @@ def predictor_view(request, pk):
                 'away_logo' :game['teams']['away']['logo'],
                 'away_name' :game['teams']['away']['name'],
             })
-
 
     if request.method == 'POST':
         print('here 1')
@@ -82,19 +82,31 @@ def predictor_view(request, pk):
             print('here 4')
             if form.is_valid():
                 print('here 5')
-                # add func to prevent saving same prediction 2x
-                # counter = fplUser.objects.get(user=request.user)
-                if user.counter == 0:
+                token = Token.objects.filter(user__exact=user ,used__exact=False).first()
+                if token == None:
+                # if user.counter == 0:
                     print('here 6')
                     return redirect('no tokens')
-                elif user.counter > 0:
+                # elif user.counter > 0:
+                else:
                     print('here 7')
-                    user.counter -= 1
-                    user.save()
+                    # token = Token.objects.filter(used__exact=False).first()
+                    # token = token[0]
+                    token.used = True
+                    token.save()
+                    # user.counter -= 1
+                    # user.save()
                 print('here 8')
+                home_name = request.POST.get('home_name')
+                away_name = request.POST.get('away_name')
                 prediction = form.save(commit=False)
                 prediction.user = user
                 prediction.fixture_id = pk
+                prediction.home_name = home_name
+                prediction.away_name = away_name
+                prediction.token = token
+                prediction.is_active = True
+                print('here 9')
                 prediction.save()
                 return redirect('home')
 
@@ -105,26 +117,30 @@ def predictor_view(request, pk):
     return render(request, 'predict.html', context)
 
 
+
+
+
+
+
 def transaction_id_view(request):
     form = TokenForm()
 
     if request.method == 'POST':
         form = TokenForm(request.POST)
+        token = request.POST.get('t_id')
         try:
-            token = request.POST.get('t_id')
             token = Token.objects.get(t_id=token)
             if token:
                 # add func to tell user used already
                 return redirect('already used')
         except ObjectDoesNotExist:
             if form.is_valid():
-                form.save(commit=False)
+                token = form.save(commit=False)
                 user = fplUser.objects.get(user=request.user)
-                form.user = user
-                form.save()
-                # counter = fplUser.objects.get(user=request.user)
                 user.counter += 1
                 user.save()
+                token.user = user
+                token.save()
                 return redirect('tid')
     
     context = {
