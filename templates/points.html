@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+
+
+{% block content %}
+    
+    <h1>POINTS PAGE</h1>
+
+    
+<br><br><br>
+
+<h1>All Season Fixtures</h1>
+
+    {% for fixture in fixtures %}
+    <div>
+
+        <p> {{fixture}} </p>
+
+        <br>
+    </div>
+
+    {% endfor %}
+{% endblock %}

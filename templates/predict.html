@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+
+
+{% block content %}
+    
+    <h1>PREDICTION PAGE</h1>
+
+    {% for game in fixture %}
+    <form action="" method="POST">
+        {% csrf_token %}
+        <span>{{ game.home_name }}</span>
+        <input type="text" name="home_name" value="{{ game.home_name }}" hidden>
+        {{ form.home_goals.label }}
+        {{ form.home_goals }}
+        <hr>
+        <span>{{game.away_name}}</span>
+        <input type="text" name="away_name" value="{{game.away_name}}" hidden>
+        {{ form.away_goals.label }}
+        {{ form.away_goals }}
+        <hr>
+        <input type="submit" value="Submit">
+    </form>
+    {% endfor %}
+
+{% endblock %}
