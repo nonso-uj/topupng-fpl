@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+    <h1>USER REG PAGE</h1>
+
+    <form action="" method="POST">
+        {% csrf_token %}
+        <label for="username">username: </label>
+        <input type="text" name="username">
+
+        <label for="password">password: </label>
+        <input type="password" name="password">
+
+        <input type="submit" value="Submit">
+    </form>
+
+{% endblock %}

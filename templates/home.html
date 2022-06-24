@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<h3><a href="{% url 'login' %}">Login</a></h3>
+<h3><a href="{% url 'logout' %}">Logout</a></h3>
+<br>
+<h3><a href="{% url 'reg' %}">Registration</a></h3>
+<h3><a href="{% url 'tid' %}">Transaction Id</a></h3>
+
+<h4>Hello, {{ request.user }}</h4>
+    
+    <h1>All Your Predictions</h1>
+
+{% for prediction in predictions %}
+
+    <p><b>{{prediction.home_name}}</b> {{prediction.fixture_id}} <img src="{{ prediction.home_logo }}" alt="club-logo"> {{ prediction.away_name }} {{ prediction.home_goals }} vs {{ prediction.away_goals }} {{ prediction.away_name }} <img src="{{ prediction.away_logo }}" alt="club-logo"></p>
+<br><br>
+{% endfor %}
+
+
+
+
+
+
+
+
+
+
+
+    <h1>All Season Fixtures</h1>
+
+    {% for fixture in fixtures %}
+    <div>
+        <p> {{fixture.fixture_id}} <img src="{{ fixture.home_logo }}" alt="club-logo"> {{ fixture.home_name }} {{ fixture.home_goals }} vs {{ fixture.away_goals }} {{ fixture.away_name }} <img src="{{ fixture.away_logo }}" alt="club-logo"></p>
+
+        <a href="{% url 'predict' fixture.fixture_id %}"><button>Predict</button></a>
+        <br>
+    </div>
+
+    {% endfor %}
+    
+{% endblock %}
+
