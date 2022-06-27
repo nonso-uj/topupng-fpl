@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+
+
+{% block content %}
+    
+    <h1 class="text-center my-5">PREDICTION PAGE</h1>
+
+<div class="container px-5">
+    <div class="card">
+        <div class="card-body">
+            {% for game in fixture %}
+            <form action="" method="POST">
+                {% csrf_token %}
+
+                <span><b>Home: </b><img src="{{game.home_logo}}" alt="club-logo"></span>
+                <input type="text" name="home_logo" value="{{ game.home_logo }}" hidden>
+
+
+                <span>{{ game.home_name }}</span>
+                <input type="text" name="home_name" value="{{ game.home_name }}" hidden>
+
+                <br><br>
+                {{ form.home_goals.label }}
+                {{ form.home_goals }}
+                
+                <br><br>
+                <hr>
+                <br>
+
+                <span><b>Away: </b><img src="{{game.away_logo}}" alt="club-logo"></span>
+                <input type="text" name="away_logo" value="{{ game.away_logo }}" hidden>
+
+                <span>{{game.away_name}}</span>
+                <input type="text" name="away_name" value="{{game.away_name}}" hidden>
+
+                <br><br>
+
+                {{ form.away_goals.label }}
+                {{ form.away_goals }}
+                <hr>
+
+                <br>
+
+                <input type="submit" class="btn btn-md btn-block btn-primary w-100 mx-auto" value="Submit">
+            </form>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

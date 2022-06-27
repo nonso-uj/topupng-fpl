@@ -1,12 +1,14 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Prediction, fplUser, Token
-from .forms import UserRegForm, PredictionForm, TokenForm
-from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth import login, logout, authenticate
+from django.http import HttpResponse
+from .models import Prediction, Token
+from .forms import PredictionForm, TokenForm
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.decorators import login_required
 import json
 import os
+
+
+from accounts.models import fplUser
 # Create your views here.
 
 pwd = os.path.dirname(__file__)
@@ -65,7 +67,7 @@ def home_view(request):
         for p in ps:
             np = Prediction.objects.get(id=p.id)
             p_ttl += np.points
-        u_dct[u.user.username] = p_ttl
+        u_dct[u.user.full_name] = p_ttl
         p_ttl = 0
 
     ndict = {}
@@ -96,7 +98,7 @@ def home_view(request):
 
 
 
-# add decoretor for tokens
+# add decoretor for tokens so you cant enter without tokens
 def predictor_view(request, pk):
     form = PredictionForm()
     fixture = []
@@ -118,23 +120,27 @@ def predictor_view(request, pk):
             predicted = Prediction.objects.get(user = user, fixture_id=pk)
             if predicted:
                 # add already predicted message later
-                return redirect('predicted')
+                return HttpResponse("<h1>You have Predicted this Game Before <br> Click here to Return to <a href='/'>Home Page</a>")
         except ObjectDoesNotExist:
             form = PredictionForm(request.POST)
             if form.is_valid():
-                token = Token.objects.filter(user__exact=user ,used__exact=False).first()
+                token = Token.objects.filter(user__exact=user,used__exact=False).first()
                 if token == None:
-                    return redirect('no tokens')
+                    return HttpResponse("<h1>You have no more Tokens, Please make more transactions <br> Click here to Return to <a href='/'>Home Page</a>")
                 else:
                     token.used = True
                     token.save()
                 home_name = request.POST.get('home_name')
+                home_logo = request.POST.get('home_logo')
                 away_name = request.POST.get('away_name')
+                away_logo = request.POST.get('away_logo')
                 prediction = form.save(commit=False)
                 prediction.user = user
                 prediction.fixture_id = pk
                 prediction.home_name = home_name
+                prediction.home_logo = home_logo
                 prediction.away_name = away_name
+                prediction.away_logo = away_logo
                 prediction.token = token
                 prediction.is_active = True
                 prediction.save()
@@ -162,7 +168,7 @@ def transaction_id_view(request):
             token = Token.objects.get(t_id=token)
             if token:
                 # add func to tell user used already
-                return redirect('already used')
+                return HttpResponse("<h1>This token has been used already <br> Click here to Return to <a href='/'>Home Page</a>")
         except ObjectDoesNotExist:
             if form.is_valid():
                 token = form.save(commit=False)
@@ -176,43 +182,3 @@ def transaction_id_view(request):
     }
     return render(request, 't_id.html', context)
 
-
-
-
-
-def reg_view(request):
-    form = UserCreationForm()
-
-    if request.method == 'POST':
-        form = UserCreationForm(request.POST)
-        if form.is_valid():
-            user = form.save()
-            fplUser.objects.create(user=user)
-            return redirect('login')
-    
-    context = {
-        'form': form
-    }
-    return render(request, 'user-reg.html', context)
-
-
-
-def login_view(request):
-    if request.method == 'POST':
-        username = request.POST.get('username')
-        password = request.POST.get('password')
-
-        user = authenticate(request, username=username, password=password)
-
-        if user is not None:
-            login(request, user)
-            return redirect('home')
-
-    context = {}
-    return render(request, 'login.html', context)
-
-
-
-def logoutUser(request):
-    logout(request)
-    return redirect('login')

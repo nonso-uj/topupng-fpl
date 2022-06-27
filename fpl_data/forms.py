@@ -1,14 +1,5 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.models import User
-from .models import Prediction, fplUser, Token
-
-
-class UserRegForm(UserCreationForm):
-    class Meta:
-        model = User
-        fields = '__all__'
-
+from .models import Prediction, Token
 
 class PredictionForm(forms.ModelForm):
     class Meta:

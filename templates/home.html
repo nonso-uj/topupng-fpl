@@ -1,57 +1,142 @@
 {% extends 'base.html' %}
 
+{% block activeHome %} active {% endblock %}
 
 {% block content %}
-<h3><a href="{% url 'login' %}">Login</a></h3>
-<h3><a href="{% url 'logout' %}">Logout</a></h3>
-<br>
-<h3><a href="{% url 'reg' %}">Registration</a></h3>
-<h3><a href="{% url 'tid' %}">Transaction Id</a></h3>
 
-<h4>Hello, {{ request.user }}</h4>
+<div class="my-4 pt-3">
+    <span class="h4 my-4 me-5">Hello, {{ request.user.first_name }}</span>
+
+    <a class="btn btn-lg btn-info text-light ms-5" href="{% url 'tid' %}">Add new Transaction Id</a>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <button type="button" class="btn btn-lg btn-primary text-light w-100" data-bs-toggle="modal" data-bs-target="#modalPredictions">
+            Your Predictions
+          </button>
+
+          
+    </div>
+  </div>
+
+
+
+
+
+<div class="modal" tabindex="-1" id="modalPredictions">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title text-center">All Your Predictions</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+
+
+            <div class="table-responsive">
+                <table class="table text-center table-hover table-borderless">
+                    <thead class="table-dark">
+                        <tr>
+                        <th scope="col" class="py-3">#</th>
+                        <th scope="col" class="py-3">Prediction</th>
+                        <th scope="col" class="py-3">Points</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for prediction in predictions %}
+                        <tr>
+                        <th scope="row" class="py-3">{{ forloop.counter }}</th>
+                        <td class="py-3">
+                            <img src="{{ prediction.home_logo }}" alt="club-logo">
+
+                             <b>{{prediction.home_name}}</b>
+                             
+                             {{prediction.home_goals}} 
+
+                             <b>vs</b>
+                            
+                             {{prediction.away_goals}}
+
+                             <b>{{ prediction.away_name }}</b> 
+
+                             <img src="{{ prediction.away_logo }}" alt="club-logo">
+                        </td>
+                        <td class="py-3">{{ prediction.points }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+<div class="container">
+    <h1 class="text-center mt-5">RANKINGS</h1>
     
-    <h1>All Your Predictions</h1>
-
-{% for prediction in predictions %}
-    <div>
-        <p>{{prediction.fixture_id}} <img src="{{ prediction.home_logo }}" alt="club-logo"> <b>{{prediction.home_name}}</b> {{ prediction.home_goals }} vs {{ prediction.away_goals }} <b>{{ prediction.away_name }}</b> <img src="{{ prediction.away_logo }}" alt="club-logo"></p>
-        <p>Prediction Status: {{ prediction.is_correct }}</p>
+    <div class="table-responsive">
+        <table class="table table-hover">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Points</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for key, value in users.items %}
+              <tr>
+                <th scope="row">{{ forloop.counter }}</th>
+                <td>{{key}}</td>
+                <td>{{value}}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+        </table>
     </div>
-
-<br><br>
-{% endfor %}
+</div>
 
 
-
-
-<table>
-    <thead>
-        <th>Name</th>
-        <th>Points</th>
-    </thead>
-    <tbody>
-        {% for key, value in users.items %}
-        <tr>
-            <td>{{key}}</td>
-            <td>{{value}}</td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
-
-
-
-    <h1>All Season Fixtures</h1>
-
-    {% for fixture in fixtures %}
-    <div>
-        <p> {{fixture.fixture_id}} <img src="{{ fixture.home_logo }}" alt="club-logo"> {{ fixture.home_name }} {{ fixture.home_goals }} vs {{ fixture.away_goals }} {{ fixture.away_name }} <img src="{{ fixture.away_logo }}" alt="club-logo"></p>
-
-        <a href="{% url 'predict' fixture.fixture_id %}"><button>Predict</button></a>
-        <br>
+    <div class="container">
+        <h1 class="text-center mt-5">All Fixtures</h1>
+        
+        <ul class="list-group list-group-flush">
+            {% for fixture in fixtures %}
+    
+            <li class="list-group-item text-center lead py-4">
+                <div class="row">
+                    <div class="col-9">
+                        <img src="{{ fixture.home_logo }}" alt="club-logo"> <b>{{ fixture.home_name }}</b>  {{ fixture.home_goals }} <b>vs</b> {{ fixture.away_goals }} <b>{{ fixture.away_name }}</b>  <img src="{{ fixture.away_logo }}" alt="club-logo">
+                    </div>
+                    <div class="col-3">
+                        <a class="btn btn-sm btn-primary ms-auto" href="{% url 'predict' fixture.fixture_id %}">Predict</a>
+                    </div>
+                </div>
+                
+            </li>
+    
+            {% endfor %}
+        </ul>
     </div>
+      
 
-    {% endfor %}
+
     
 {% endblock %}
 

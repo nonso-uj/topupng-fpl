@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block activeLogin %} active {% endblock %}
+
+{% block content %}
+
+<div class="container w-75 text-center py-5">
+    <h1>USER LOGIN PAGE</h1>
+    <div class="card py-4 my-3">
+        <div class="card-body text-center">
+            <form action="" method="POST">
+                {% csrf_token %}
+                <label for="email" class="form-label">Email: </label>
+                <input type="text" class="form-control" name="email">
+        
+                <label for="password" class="form-label mt-3">Password: </label>
+                <input type="password" class="form-control" name="password">
+        
+                <input type="submit" class="btn btn-md btn-block btn-primary w-50 mx-auto mt-5" value="Submit">
+
+                <p class="form-text mt-4">Forgot your password? <a href="{% url 'reset_password' %}">Reset</a></p>
+                <p class="form-text mt-4">Don't have an account? <a href="{% url 'reg' %}">Register</a></p>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

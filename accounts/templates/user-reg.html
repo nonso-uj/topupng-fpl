@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+
+{% block activeReg %} active {% endblock %}
+
+{% block content %}
+    
+<div class="container w-75 text-center py-3">
+    <h1>USER REGISTRATION PAGE</h1>
+    <div class="card py-4 my-3">
+        <div class="card-body text-center">
+            <form action="" method="POST">
+                {% csrf_token %}
+                
+                
+                <div class="form-group mb-3">
+                    <label for="email" class="form-label mt-3">Email: </label>
+                    {{ form.email }}
+                </div>
+                
+                <div class="form-group mb-3">
+                    <label for="first_name" class="form-label">First Name: </label>
+                    {{ form.first_name }}
+                </div>
+
+                <div class="form-group mb-3">
+                    <label for="last_name" class="form-label">Last Name: </label>
+                    {{ form.last_name }}
+                </div>
+
+                <div class="form-group mb-3">
+                    <label for="phone" class="form-label">Phone: </label>
+                    {{ form.phone }}
+                </div>
+                
+                <div class="form-group mb-3">
+                    <label for="referral" class="form-label">Referral Code: </label>
+                    <input type="text" name="referral" class="form-control" placeholder="Referral Code">
+                    <span class="form-text text-danger">optional</span>
+                </div>
+                
+                <div class="form-group mb-3">
+                    <label for="password1" class="form-label mt-3">Password: </label>
+                    {{ form.password1 }}
+                </div>
+
+                <div class="form-group mb-3">
+                    <label for="password2" class="form-label mt-3">Password: </label>
+                    {{ form.password2 }}
+                </div>
+                
+                <input type="submit" class="btn btn-md btn-block btn-primary w-50 mx-auto mt-3" value="Submit">
+
+                <span class="form-text text-danger mt-4">{{form.errors}}</span>
+                
+            </form>
+            
+            <p class="form-text mt-3">Already have an account? <a href="{% url 'login' %}">Login</a></p>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+
+{% block activeTid %} active {% endblock %}
+
+{% block content %}
+    
+
+<h1 class="text-center my-5">TRANSACTION ID PAGE</h1>
+<div class="card">
+    <div class="card-body pt-5 text-center">
+        <form action="" method="POST">
+            {% csrf_token %}
+            <input type="text" name="user" value="" hidden>
+            {{ form }}
+            <input type="submit" class="btn btn-md btn-block btn-primary w-100 mx-auto mt-5" value="Submit">
+        </form>
+    </div>
+</div>
+
+{% endblock %}
