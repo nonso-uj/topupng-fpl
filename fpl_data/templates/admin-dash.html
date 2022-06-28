@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+
+{% block activeTid %} active {% endblock %}
+
+{% block content %}
+    
+
+<h1 class="text-center my-5">UPDATE POINTS</h1>
+<div class="card my-5">
+    <div class="card-body pt-5 text-center">
+        <a class="btn btn-lg btn-primary btn-block w-100" href="{% url 'points' %}">Points</a>
+    </div>
+</div>
+
+
+
+
+
+<h1 class="text-center my-5">START API CALLS</h1>
+<div class="card my-5">
+    <div class="card-body pt-5 text-center">
+        <a class="btn btn-lg btn-primary btn-block w-100" href="{% url 'scores' %}">Scores</a>
+    </div>
+</div>
+
+{% endblock %}

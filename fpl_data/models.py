@@ -5,7 +5,8 @@ User = get_user_model()
 from accounts.models import fplUser
 
 class Token(models.Model):
-    t_id = models.IntegerField(verbose_name='Transaction ID', unique=True)
+    # charfield max_length=5
+    t_id = models.CharField(max_length=5 ,verbose_name='Transaction ID', unique=True)
     user = models.ForeignKey(fplUser, on_delete=models.SET_NULL, null=True)
     used = models.BooleanField(default=False)
 

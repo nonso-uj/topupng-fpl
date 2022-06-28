@@ -1,24 +1,44 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from .models import Prediction, Token
+from accounts.models import Referral
 from .forms import PredictionForm, TokenForm
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.decorators import login_required
-import json
-import os
+from django.contrib import messages
+import json, os, schedule, time
+from .json_loader import scores_data, get_data
 
 
 from accounts.models import fplUser
 # Create your views here.
 
-pwd = os.path.dirname(__file__)
 
 
-def scores_data():
-    with open(pwd + '/json_data/fpl_data.txt','r') as f:
-        raw_str = f.read()
-    data = json.loads(raw_str)
-    return data
+@login_required(login_url='login')
+def admin_dash(request):
+    if not request.user.is_superuser:
+        messages.warning(request, 'Access Denied')
+        return redirect('home')
+    return render(request, 'admin-dash.html')
+
+
+# AUTOMATES API CALLS
+def scores_update(request):
+    schedule.every(5).seconds.until('09:00').do(get_data)
+
+    x = 0
+    while True:
+        schedule.run_pending()
+        print('running scores func...')
+        print(x)
+        x += 1
+        if x == 2:
+            break
+        time.sleep(5)
+    messages.success(request, 'Updates started successfully')
+    return redirect('admin-dash')
+
 
 
 def points_view(request):
@@ -40,24 +60,24 @@ def points_view(request):
                         np.is_correct = True
                         np.points = 3
                         np.save()
-
-    context = {
-        'fixtures': fixtures
-    }
-    return render(request, 'points.html', context)
+    messages.success(request, 'Points awarded successfully')
+    return redirect('admin-dash')
+    
 
 
 
 
 
-
-
-
+# HOME VIEW FUNC
+# AUTOMATE ADDING SCORES WITHOUT RELOAD WITH AJAX
+# make more efficient, always going through all users, bad performance
 @login_required(login_url='login')
 def home_view(request):
     user = fplUser.objects.get(user=request.user)
+    referrals = Referral.objects.all()
     users = fplUser.objects.all()
     predictions = Prediction.objects.filter(user=user)
+    
     fixtures = []
 
     u_dct = {}
@@ -67,13 +87,32 @@ def home_view(request):
         for p in ps:
             np = Prediction.objects.get(id=p.id)
             p_ttl += np.points
-        u_dct[u.user.full_name] = p_ttl
+        u_dct[u] = p_ttl
         p_ttl = 0
+
 
     ndict = {}
     nlst = sorted(u_dct, key=u_dct.get, reverse=True)
     for w in nlst:
         ndict[w] = u_dct[w]
+
+
+    dct = {}
+    for r in referrals:
+        # u = r.referrer
+        if r in dct:
+            dct[r] += 1
+        else:
+            dct[r] = 1
+
+
+    rdct = {}
+    rlst = sorted(dct, key=dct.get, reverse=True)
+    for w in rlst:
+        rdct[w] = dct[w]
+    
+
+
 
 
     games = scores_data()
@@ -92,9 +131,14 @@ def home_view(request):
     context = {
         'fixtures': fixtures,
         'predictions': predictions,
-        'users': ndict
+        'users': ndict,
+        'referrals': rdct
     }
     return render(request, 'home.html', context)
+
+
+
+
 
 
 
@@ -119,14 +163,15 @@ def predictor_view(request, pk):
         try:
             predicted = Prediction.objects.get(user = user, fixture_id=pk)
             if predicted:
-                # add already predicted message later
-                return HttpResponse("<h1>You have Predicted this Game Before <br> Click here to Return to <a href='/'>Home Page</a>")
+                messages.success(request, 'You can only predict a game once')
+                return redirect('home')
         except ObjectDoesNotExist:
             form = PredictionForm(request.POST)
             if form.is_valid():
                 token = Token.objects.filter(user__exact=user,used__exact=False).first()
                 if token == None:
-                    return HttpResponse("<h1>You have no more Tokens, Please make more transactions <br> Click here to Return to <a href='/'>Home Page</a>")
+                    messages.success(request, 'Please add more transaction ids from Topup.ng to continue predicting')
+                    return redirect('home')
                 else:
                     token.used = True
                     token.save()
@@ -144,6 +189,7 @@ def predictor_view(request, pk):
                 prediction.token = token
                 prediction.is_active = True
                 prediction.save()
+                messages.success(request, 'Your prediction has been added successfully')
                 return redirect('home')
 
     context = {
@@ -167,15 +213,16 @@ def transaction_id_view(request):
         try:
             token = Token.objects.get(t_id=token)
             if token:
-                # add func to tell user used already
-                return HttpResponse("<h1>This token has been used already <br> Click here to Return to <a href='/'>Home Page</a>")
+                messages.success(request, 'This Transaction id has been used already, please check your spelling or try another')
+                return redirect('tid')
         except ObjectDoesNotExist:
             if form.is_valid():
                 token = form.save(commit=False)
                 user = fplUser.objects.get(user=request.user)
                 token.user = user
                 token.save()
-                return redirect('tid')
+                messages.success(request, 'YourTransaction id was added successfully')
+                return redirect('home')
     
     context = {
         'form': form

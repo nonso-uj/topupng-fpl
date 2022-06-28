@@ -11,6 +11,7 @@ from django.contrib.sites.shortcuts import get_current_site
 from .tokens import account_activation_token
 from django.core.mail import send_mail
 from django.core.exceptions import ObjectDoesNotExist
+from django.contrib import messages
 # Create your views here.
 
 
@@ -29,12 +30,9 @@ def referral_func(refer, fpl_user):
         referrer = fplUser.objects.get(referral_code=refer)
         referral = Referral.objects.create(referrer = referrer, referred = fpl_user)
         referral.code = refer
-        # referral.
-        # referral.
         referral.save()
-        # return redirect('login')
     except ObjectDoesNotExist:
-        return HttpResponse('<h1>Wheres your referral code bitch</h1>')
+        pass
 
 
 
@@ -46,7 +44,7 @@ def reg_view(request):
         form = CustomUserCreationForm(request.POST)
         if form.is_valid():
             user = form.save(commit=False)
-            # user.is_active = False
+            user.is_active = False
             user.save()
             fpl_user = fplUser.objects.create(user=user)
             fpl_user.referral_code = referral_code_gen()
@@ -54,24 +52,24 @@ def reg_view(request):
             refer = request.POST.get('referral')
             if refer is not None:
                 referral_func(refer, fpl_user)
-            print('lol')
-            
-                    # pass
-            # current_site = get_current_site(request)
-            # mail_subject = 'Activate your account'
-            # # make better template
-            # message = render_to_string('active_email.html', {
-            #     'user': user,
-            #     'domain': current_site.domain,
-            #     'uid': urlsafe_base64_encode(force_bytes(user.id)),
-            #     'token': account_activation_token.make_token(user),
-            # })
-            # to_email = form.cleaned_data.get('email')
-            # # add company email
-            # send_mail(mail_subject, message, 'nonso.udonne@gmail.com', [to_email])
+
+            current_site = get_current_site(request)
+            mail_subject = 'Activate your account'
+            # make better template
+            message = render_to_string('active_email.html', {
+                'user': user,
+                'domain': current_site.domain,
+                'uid': urlsafe_base64_encode(force_bytes(user.id)),
+                'token': account_activation_token.make_token(user),
+            })
+            to_email = form.cleaned_data.get('email')
+            # add company email
+            send_mail(mail_subject, message, 'nonso.udonne@gmail.com', [to_email])
+            # change to message so can redirect to login
+            messages.info('Account registration successfull, Please confirm your email to Login')
+            return redirect('login')
             # return HttpResponse('<h1>Please confirm your email</h1>')
 
-            return redirect('login')
     context = {
         'form': form
     }
@@ -91,7 +89,7 @@ def activate(request, uidb64, token):
     if user is not None and account_activation_token.check_token(user, token):
         user.is_active = True
         user.save()
-        # add template and message to 
+        # add login redirect and message to 
         return HttpResponse('Thanks for email confirmation')
     else:
         return HttpResponse('Invalid Activation link')
@@ -101,7 +99,7 @@ def activate(request, uidb64, token):
 
 
 
-
+# if user not active, go confirm your email
 def login_view(request):
     if request.method == 'POST':
         email = request.POST.get('email')

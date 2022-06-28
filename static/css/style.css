@@ -5,5 +5,16 @@ img{
 
 
 body{
-    padding-top: 4rem;
+    padding-top: 10rem;
 }
+
+/* .toast{
+    display: block;
+    color: black;
+    z-index: 100;
+} */
+
+/* #showToast{
+    visibility: visible !important;
+    opacity: 1 !important;
+} */

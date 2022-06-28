@@ -99,12 +99,19 @@ class MyUser(AbstractBaseUser, PermissionsMixin):
 
 class fplUser(models.Model):
     user = models.OneToOneField(MyUser, on_delete=models.CASCADE)
-    referral_code = models.CharField(max_length=6, verbose_name='Referral Code')
+    # referrer = models.ForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='referred')
     fav_club = models.CharField(max_length=100, verbose_name='Favorite Club')
     # counter = models.IntegerField(default=0)
 
     def __str__(self):
-        return self.user.email
+        return self.user.full_name()
+
+    def get_referred(self):
+        if self.referrer is None:
+            return fplUser.objects.filter(referrer=self)
+        return fplUser.objects.none()
+
+
 
 
 class Referral(models.Model):
@@ -116,6 +123,6 @@ class Referral(models.Model):
         unique_together = (('referrer', 'referred'),)
 
     def __str__(self):
-        return self.referrer.user.email
+        return self.referrer.user.full_name()
 
     
