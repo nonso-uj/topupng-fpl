@@ -99,30 +99,21 @@ class MyUser(AbstractBaseUser, PermissionsMixin):
 
 class fplUser(models.Model):
     user = models.OneToOneField(MyUser, on_delete=models.CASCADE)
-    # referrer = models.ForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='referred')
+    referrer = models.ForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='referred')
     fav_club = models.CharField(max_length=100, verbose_name='Favorite Club')
-    # counter = models.IntegerField(default=0)
+    total_points = models.IntegerField(default=0)
+    total_referrals = models.IntegerField(default=0)
+    refer_valid = models.BooleanField(default=False)
 
     def __str__(self):
         return self.user.full_name()
 
     def get_referred(self):
-        if self.referrer is None:
-            return fplUser.objects.filter(referrer=self)
-        return fplUser.objects.none()
-
-
-
-
-class Referral(models.Model):
-    referrer = models.ForeignKey(fplUser, on_delete=models.CASCADE, related_name='referrer')
-    referred = models.OneToOneField(fplUser, on_delete=models.CASCADE, related_name='referred')
-    code = models.CharField(max_length=6, verbose_name='Referral Code')
-
-    class Meta:
-        unique_together = (('referrer', 'referred'),)
-
-    def __str__(self):
-        return self.referrer.user.full_name()
-
+        return fplUser.objects.filter(referrer=self, refer_valid=True)
     
+    def get_referred_num(self):
+        self.total_referrals = fplUser.objects.filter(referrer=self, refer_valid=True).count()
+        super().save()
+
+        
+

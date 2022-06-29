@@ -6,8 +6,9 @@ def get_data():
     url = "https://v3.football.api-sports.io/fixtures"
 
     querystring = {
-        'league':'2',
-        'season':'2021'
+        'league':'200',
+        'season':'2021',
+        'date':'2022-06-29',
     }
 
 

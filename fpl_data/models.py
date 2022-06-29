@@ -26,7 +26,7 @@ class Prediction(models.Model):
     away_goals = models.CharField(max_length=2)
     is_correct = models.BooleanField(default=False)
     points = models.IntegerField(default=0)
-    is_active = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=True)
     date_created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

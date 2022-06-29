@@ -4,17 +4,11 @@ img{
 }
 
 
-body{
-    padding-top: 10rem;
+#form-div{
+    height: 50vh;
+    background-color: aqua;
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+    justify-content: center;
 }
-
-/* .toast{
-    display: block;
-    color: black;
-    z-index: 100;
-} */
-
-/* #showToast{
-    visibility: visible !important;
-    opacity: 1 !important;
-} */

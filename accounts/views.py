@@ -1,6 +1,5 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .models import fplUser, Referral
 from .forms import CustomUserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, logout, authenticate, get_user_model
@@ -12,27 +11,25 @@ from .tokens import account_activation_token
 from django.core.mail import send_mail
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib import messages
+
+from .models import fplUser
+User = get_user_model()
 # Create your views here.
 
 
-def referral_code_gen():
-    User = get_user_model()
-    random_number = User.objects.make_random_password(length=6, allowed_chars='abcdefghjkmnpqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ23456789')
-
-    while fplUser.objects.filter(referral_code=random_number):
-        random_number = User.objects.make_random_password(length=6, allowed_chars='abcdefghjkmnpqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ23456789')
-    return random_number
 
 
-def referral_func(refer, fpl_user):
+def referrer_num(request, refer):
     try:
-        print(fpl_user, refer)
-        referrer = fplUser.objects.get(referral_code=refer)
-        referral = Referral.objects.create(referrer = referrer, referred = fpl_user)
-        referral.code = refer
-        referral.save()
+        print(refer)
+        referrer = User.objects.get(phone=refer)
+        referrer = fplUser.objects.get(user=referrer)
+        return referrer
     except ObjectDoesNotExist:
-        pass
+        messages.info(request, 'Referrers phone number incorrect or does not exist')
+        return redirect('reg')
+
+
 
 
 
@@ -44,31 +41,30 @@ def reg_view(request):
         form = CustomUserCreationForm(request.POST)
         if form.is_valid():
             user = form.save(commit=False)
+            refer = request.POST.get('referrer')
+            referrer = referrer_num(request, refer)
             user.is_active = False
             user.save()
             fpl_user = fplUser.objects.create(user=user)
-            fpl_user.referral_code = referral_code_gen()
+            fpl_user.referrer = referrer
             fpl_user.save()
-            refer = request.POST.get('referral')
-            if refer is not None:
-                referral_func(refer, fpl_user)
 
-            current_site = get_current_site(request)
-            mail_subject = 'Activate your account'
-            # make better template
-            message = render_to_string('active_email.html', {
-                'user': user,
-                'domain': current_site.domain,
-                'uid': urlsafe_base64_encode(force_bytes(user.id)),
-                'token': account_activation_token.make_token(user),
-            })
-            to_email = form.cleaned_data.get('email')
-            # add company email
-            send_mail(mail_subject, message, 'nonso.udonne@gmail.com', [to_email])
-            # change to message so can redirect to login
-            messages.info('Account registration successfull, Please confirm your email to Login')
+            # SEND MAIL PART
+            # current_site = get_current_site(request)
+            # mail_subject = 'Activate your account'
+            # # make better template
+            # message = render_to_string('active_email.html', {
+            #     'user': user,
+            #     'domain': current_site.domain,
+            #     'uid': urlsafe_base64_encode(force_bytes(user.id)),
+            #     'token': account_activation_token.make_token(user),
+            # })
+            # to_email = form.cleaned_data.get('email')
+            # # add company email
+            # send_mail(mail_subject, message, 'nonso.udonne@gmail.com', [to_email])
+
+            messages.info(request, 'Account registration successfull, Please confirm your email to Login')
             return redirect('login')
-            # return HttpResponse('<h1>Please confirm your email</h1>')
 
     context = {
         'form': form
@@ -88,6 +84,8 @@ def activate(request, uidb64, token):
         user = None
     if user is not None and account_activation_token.check_token(user, token):
         user.is_active = True
+        if user.fpluser.referrer is not None:
+            user.fpluser.refer_valid = True
         user.save()
         # add login redirect and message to 
         return HttpResponse('Thanks for email confirmation')
@@ -106,10 +104,14 @@ def login_view(request):
         password = request.POST.get('password')
 
         user = authenticate(request, email=email, password=password)
-
+        
         if user is not None:
             login(request, user)
             return redirect('home')
+        else:
+            messages.info(request, 'Please confirm your email to Login')
+            return redirect('login')
+
 
     context = {}
     return render(request, 'login.html', context)

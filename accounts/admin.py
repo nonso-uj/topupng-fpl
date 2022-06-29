@@ -5,7 +5,8 @@ from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
 from django.core.exceptions import ValidationError
 
-from .models import MyUser, fplUser, Referral
+from .models import MyUser, fplUser
+# , Referral
 
 # Register your models here.
 
@@ -86,6 +87,6 @@ class UserAdmin(BaseUserAdmin):
 
 
 admin.site.register(MyUser, UserAdmin)
-admin.site.register(Referral)
+# admin.site.register(Referral)
 admin.site.register(fplUser)
 admin.site.unregister(Group)

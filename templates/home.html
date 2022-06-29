@@ -4,19 +4,91 @@
 
 {% block content %}
 
+
+<div class="w-100 mb-3 mt-5" id="form-div">
+  <h4 class="text-center">ADD NEW TRANSACTION ID</h4>
+    <div class="pt-3 text-center">
+        <form action="" method="POST" id="tokenForm" data-url="{% url 'tid' %}">
+            {% csrf_token %}
+            <!-- <input type="text" name="user" value="" hidden> -->
+            {{ form.t_id }}
+            <input type="submit" class="btn btn-md btn-block btn-primary w-25 mx-auto mt-3" value="Submit">
+        </form>
+    </div>
+</div>
+
+
+
+
+
+<ul class="nav nav-tabs nav-fill" id="myTab" role="tablist">
+  
+  <li class="nav-item" role="presentation">
+    <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">All Fixtures</button>
+  </li>
+
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">My Predictions</button>
+  </li>
+  
+</ul>
+
+<div class="tab-content" id="myTabContent">
+  <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+        
+        <ul id="fixtures-list" class="list-group list-group-flush" data-url="{% url 'get-scores' %}">
+          {% for fixture in fixtures %}
+
+          <li class="list-group-item text-center lead py-4">
+              <div class="row">
+                  <div class="col-9">
+                      <img src="{{ fixture.home_logo }}" alt="club-logo"> <b>{{ fixture.home_name }}</b> <span id="'scores">  {{ fixture.home_goals }} <b>vs</b> {{ fixture.away_goals }} </span> <b>{{ fixture.away_name }}</b>  <img src="{{ fixture.away_logo }}" alt="club-logo">
+                  </div>
+                  <div class="col-3">
+                      <a class="btn btn-sm btn-primary ms-auto" href="{% url 'predict' fixture.fixture_id %}">Predict</a>
+                  </div>
+              </div>
+              
+          </li>
+
+          {% endfor %}
+        </ul>
+  </div>
+  <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">...</div>
+</div>
+
+
+<br><br><br><br><br><br><br><br><br><br><br><br>
+
+
+
+
+
+
 <div class="my-4 pt-3">
     <span class="h4 my-4 me-5">Hello, {{ request.user.first_name }}</span>
-
-    <a class="btn btn-lg btn-info text-light ms-5" href="{% url 'tid' %}">Add new Transaction Id</a>
 </div>
+
+
+<div class="card">
+  <h1 class="text-center my-5">ADD NEW TRANSACTION ID</h1>
+    <div class="card-body pt-5 text-center">
+        <form action="" method="POST" id="tokenForm" data-url="{% url 'tid' %}">
+            {% csrf_token %}
+            <!-- <input type="text" name="user" value="" hidden> -->
+            {{ form }}
+            <input type="submit" class="btn btn-md btn-block btn-primary w-100 mx-auto mt-5" value="Submit">
+        </form>
+    </div>
+</div>
+
+
 
 <div class="card">
     <div class="card-body">
         <button type="button" class="btn btn-lg btn-primary text-light w-100" data-bs-toggle="modal" data-bs-target="#modalPredictions">
             Your Predictions
           </button>
-
-          
     </div>
   </div>
 
@@ -103,11 +175,11 @@
               </tr>
             </thead>
             <tbody>
-              {% for key, value in users.items %}
+              {% for user in fusers %}
               <tr>
                 <th scope="row">{{ forloop.counter }}</th>
-                <td>{{key}}</td>
-                <td>{{value}}</td>
+                <td>{{user.user.full_name}}</td>
+                <td>{{user.total_points}}</td>
               </tr>
               {% endfor %}
             </tbody>
@@ -131,11 +203,11 @@
               </tr>
             </thead>
             <tbody>
-              {% for key, value in referrals.items %}
+              {% for user in rusers %}
               <tr>
                 <th scope="row">{{ forloop.counter }}</th>
-                <td>{{key}}</td>
-                <td>{{value}}</td>
+                <td>{{user.user.full_name}}</td>
+                <td>{{user.total_referrals}}</td>
               </tr>
               {% endfor %}
             </tbody>
@@ -144,27 +216,7 @@
 </div>
 
 
-    <div class="container">
-        <h1 class="text-center mt-5">All Fixtures</h1>
-        
-        <ul class="list-group list-group-flush">
-            {% for fixture in fixtures %}
     
-            <li class="list-group-item text-center lead py-4">
-                <div class="row">
-                    <div class="col-9">
-                        <img src="{{ fixture.home_logo }}" alt="club-logo"> <b>{{ fixture.home_name }}</b>  {{ fixture.home_goals }} <b>vs</b> {{ fixture.away_goals }} <b>{{ fixture.away_name }}</b>  <img src="{{ fixture.away_logo }}" alt="club-logo">
-                    </div>
-                    <div class="col-3">
-                        <a class="btn btn-sm btn-primary ms-auto" href="{% url 'predict' fixture.fixture_id %}">Predict</a>
-                    </div>
-                </div>
-                
-            </li>
-    
-            {% endfor %}
-        </ul>
-    </div>
       
 
 

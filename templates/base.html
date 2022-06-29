@@ -14,23 +14,24 @@
 </head>
 <body>
 
+  {% include 'navbar.html' %}
     
-    <div class="container">
+  <div class="container">
 
         
-        {% include 'navbar.html' %}
 
-
-        {% for message in messages %}
-        <div id="showToast" class="toast w-100 align-items-center" role="alert" aria-live="assertive" aria-atomic="true">
-            <div class="d-flex w-100">
-              <div class="toast-body">
-                <p id="messages"></p>{{message}}
-             </div>
-              <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+        <div id="toaster">
+          {% for message in messages %}
+          <div id="showToast" class="toast w-100 align-items-center" role="alert" aria-live="assertive" aria-atomic="true">
+              <div class="d-flex w-100">
+                <div class="toast-body">
+                  <p id="messages">{{message}}</p>
+              </div>
+                <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+              </div>
             </div>
-          </div>
-        {% endfor %}
+          {% endfor %}
+        </div>
 
 
         {% block content %}
@@ -42,5 +43,9 @@
     <script src="{% static 'js/jquery.js' %}"></script>
     <script src="{% static 'js/bootstrap.bundle.js' %}"></script>
     <script src="{% static 'js/main.js' %}"></script>
+    <script>
+     
+
+    </script>
 </body>
 </html>

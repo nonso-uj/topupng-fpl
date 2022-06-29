@@ -1,0 +1,53 @@
+<div class="container">
+    <h3 class="text-center mt-5">REFERRALS</h3>
+    
+    <div class="table-responsive">
+        <table class="table table-hover">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Points</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for key, value in referrals.items %}
+              <tr>
+                <th scope="row">{{ forloop.counter }}</th>
+                <td>{{key}}</td>
+                <td>{{value}}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+
+
+
+
+
+<ul class="list-group list-group-flush">
+    {% for fixture in fixtures %}
+
+    <li class="list-group-item text-center lead py-4">
+        <div class="row">
+            <div class="col-9">
+                <img src="{{ fixture.home_logo }}" alt="club-logo"> <b>{{ fixture.home_name }}</b>  {{ fixture.home_goals }} <b>vs</b> {{ fixture.away_goals }} <b>{{ fixture.away_name }}</b>  <img src="{{ fixture.away_logo }}" alt="club-logo">
+            </div>
+            <div class="col-3">
+                <a class="btn btn-sm btn-primary ms-auto" href="{% url 'predict' fixture.fixture_id %}">Predict</a>
+            </div>
+        </div>
+        
+    </li>
+
+    {% endfor %}
+</ul>
+
+
+
+
+<a class="btn btn-lg btn-info text-light ms-5" href="{% url 'tid' %}">Add new Transaction Id</a>

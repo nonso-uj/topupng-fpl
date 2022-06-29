@@ -8,6 +8,10 @@ class PredictionForm(forms.ModelForm):
 
 
 class TokenForm(forms.ModelForm):
+    t_id = forms.CharField(widget=forms.TextInput(
+        attrs={
+            'class':'form-control w-75 mx-auto'
+        }))
     class Meta:
         model= Token
         fields = ['t_id']
