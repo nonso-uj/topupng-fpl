@@ -231,6 +231,8 @@ def home_view(request):
 
 # add decorator for tokens so you cant enter without tokens
 def predictor_view(request, pk):
+
+
     form = PredictionForm()
     fixture = []
 
@@ -247,6 +249,8 @@ def predictor_view(request, pk):
             })
 
     if request.method == 'POST':
+        if not request.user.is_authenticated:
+            return JsonResponse({'result':'you must login to predict a game'})
         user = fplUser.objects.get(user=request.user)
         try:
             predicted = Prediction.objects.get(user = user, fixture_id=pk)

@@ -24,9 +24,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-2f6ea6i)y+yrq3bw83)^y#0$ljnjk$5x)l2-9tlgmy5sloh!y*'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['topup-fpl-test.herokuapp.com', '127.0.0.1:8000']
+ALLOWED_HOSTS = ['topup-fpl-test.herokuapp.com', '127.0.0.1']
 
 
 # Application definition
@@ -86,28 +86,24 @@ WSGI_APPLICATION = 'topupng_fpl.wsgi.application'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'LIVEDB2',
-        'USER': 'mrmoney',
-        'PASSWORD': 'nonso-1406',
-        'HOST': 'database-2.cq9d2qpaanx5.us-east-1.rds.amazonaws.com',
-        'PORT': '5432'
-    }
+  'default': {
+      'ENGINE': 'django.db.backends.sqlite3',
+      'NAME': BASE_DIR / 'db.sqlite3',
+  }
 }
 
 
 
 
 #S3 BUCKETS CONFIG
-AWS_ACCESS_KEY_ID = 'AKIAVYC2D2VHMKFJTOGK'
-AWS_SECRET_ACCESS_KEY = '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'
-AWS_STORAGE_BUCKET_NAME = 'nonsofplbucket'
+# AWS_ACCESS_KEY_ID = 'AKIAVYC2D2VHMKFJTOGK'
+# AWS_SECRET_ACCESS_KEY = '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'
+# AWS_STORAGE_BUCKET_NAME = 'nonsofplbucket'
 
-AWS_S3_FILE_OVERWRITE = False
-AWS_DEFAULT_ACL = None
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+# AWS_S3_FILE_OVERWRITE = False
+# AWS_DEFAULT_ACL = None
+# DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+# STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
 
 
@@ -153,7 +149,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+# STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 STATIC_URL = '/static/'
 
