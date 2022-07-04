@@ -9,7 +9,7 @@
     position: relative;
     margin: 0 0 0 0 !important;
     padding: 0 0 0 0;
-    background-image: 'url({% static 'images/hero.jpg' %})';
+    background-image: url('{% static 'images/hero.jpg' %}');
     background-position: center;
     background-size: cover;
 }
