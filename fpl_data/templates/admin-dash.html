@@ -4,24 +4,280 @@
 {% block activeTid %} active {% endblock %}
 
 {% block content %}
+
+
+
+
+<!-- Begin Page Content -->
+<div class="container-fluid pt-5 mt-5">
+
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Admin Dashboard</h1>
+    </div>
+
+    <!-- Content Row -->
+    <div class="row mb-5">
+
+        <!-- Earnings (Monthly) Card Example -->
+        <div class="col-xl-4 col-md-6 mb-4">
+            <div class="card border-left-primary shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs text-center font-weight-bold text-warning text-uppercase mb-1">
+                                UPDATE POINTS</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800"><a class="btn btn-lg btn-primary btn-block w-100 predictBtn" href="{% url 'points' %}">Points</a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Earnings (Monthly) Card Example -->
+        <div class="col-xl-4 col-md-6 mb-4">
+            <div class="card border-left-success shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs text-center font-weight-bold text-warning text-uppercase mb-1">
+                                START API CALLS</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800 text-center">
+                                    <form action="" method="POST" data-admin="{% url 'scores' %}" id="adminForm">
+                                        {% csrf_token %}
+                                        <label for="until">Untill</label>
+                                        <input type="time" id="until" name="until" required>
+                                        <input type="submit" value="Submit" class="btn btn-md btn-primary predictBtn">
+                                    </form>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
+
+        <!-- Pending Requests Card Example -->
+        <div class="col-xl-4 col-md-6 mb-4">
+            <div class="card border-left-warning shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs text-center font-weight-bold text-warning text-uppercase mb-1">
+                                STOP API CALLS</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800"><a class="btn btn-lg btn-primary btn-block w-100 predictBtn" href="{% url 'scores' %}">STOP</a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <!-- Content Row -->
     
+    <div class="row mb-5 pb-5">
 
-<h1 class="text-center my-5">UPDATE POINTS</h1>
-<div class="card my-5">
-    <div class="card-body pt-5 text-center">
-        <a class="btn btn-lg btn-primary btn-block w-100" href="{% url 'points' %}">Points</a>
+        <!-- Area Chart -->
+        <div class="col-10 mx-auto mb-5">
+            <div class="card shadow mb-4">
+                <!-- Card Header - Dropdown  d-flex flex-row align-items-center justify-content-between -->
+                <div class="card-header py-3 text-center">
+                    <h6 class="m-0 font-weight-bold text-warning">Winners Table: FPL POINTS</h6>
+                </div>
+                <!-- Card Body -->
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                              <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Phone</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Points</th>
+                                <th scope="col">Predictions</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              {% for user in fusers %}
+                              <tr>
+                                <th scope="row">{{ forloop.counter }}</th>
+                                <td>{{user.user.full_name}}</td>
+                                <td>{{user.user.phone}}</td>
+                                <td>{{user.user.email}}</td>
+                                <td>{{user.total_points}}</td>
+                                <td class="py-3">
+                                    <a class="btn btn-sm btn-primary mx-auto predictBtn usersPreds" href="{% url 'predictions' user.id %}"  data-bs-toggle="modal" data-bs-target="#userPredictions">
+                                        Predictions
+                                    </a>
+                                </td>
+                              </tr>
+                              {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="modal" tabindex="-1" id="userPredictions">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title text-center">Predictions</h5>
+                  <button type="button" id="closePredict" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+        
+                    <div class="table-responsive">
+                        <table class="table text-center table-hover table-borderless">
+                            <thead class="table-light">
+                            <tr>
+                                <th scope="col" class="py-3">#</th>
+                                <th scope="col" class="py-3">Home</th>
+                                <th scope="col" class="py-3">Goals</th>
+                                <th scope="col" class="py-3">Away</th>
+                                <th scope="col" class="py-3">Points</th>
+                                <th scope="col" class="py-3">Date</th>
+                            </tr>
+                            </thead>
+                            <tbody id="predTable">
+                            
+                            </tbody>
+                        </table>
+                    </div>
+        
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+        </div>
+
+
+
+
+        <!-- Pie Chart -->
+        <div class="col-10 mx-auto">
+            <div class="card shadow mb-4">
+                <!-- Card Header - Dropdown -->
+                <div class="card-header py-3 text-center">
+                    <h6 class="m-0 font-weight-bold text-warning">REFERRALS</h6>
+                </div>
+                <!-- Card Body -->
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                              <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Phone</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Points</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              {% for user in rusers %}
+                              <tr>
+                                <th scope="row">{{ forloop.counter }}</th>
+                                <td>{{user.user.full_name}}</td>
+                                <td>{{user.user.phone}}</td>
+                                <td>{{user.user.email}}</td>
+                                <td>{{user.total_referrals}}</td>
+                              </tr>
+                              {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+
 </div>
+<!-- /.container-fluid -->
 
-
-
-
-
-<h1 class="text-center my-5">START API CALLS</h1>
-<div class="card my-5">
-    <div class="card-body pt-5 text-center">
-        <a class="btn btn-lg btn-primary btn-block w-100" href="{% url 'scores' %}">Scores</a>
-    </div>
-</div>
 
 {% endblock %}
+
+
+
+
+
+
+
+
+<div class="my-5 pb-5">
+    <h1 class="text-center">RANKINGS</h1>
+  
+    <ul class="nav nav-tabs nav-fill" id="myTab" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button class="nav-link active" id="rank-tab" data-bs-toggle="tab" data-bs-target="#rank" type="button" role="tab" aria-controls="rank" aria-selected="true">FPL POINTS</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="refer-tab" data-bs-toggle="tab" data-bs-target="#refer" type="button" role="tab" aria-controls="refer" aria-selected="false">REFERRALS</button>
+      </li>
+    </ul>
+    
+    
+    <div class="tab-content mt-3" id="myTabContent">
+      <div class="tab-pane fade show active" id="rank" role="tabpanel" aria-labelledby="rank-tab">
+    
+        
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Points</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for user in fusers %}
+                  <tr>
+                    <th scope="row">{{ forloop.counter }}</th>
+                    <td>{{user.user.full_name}}</td>
+                    <td>{{user.total_points}}</td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+            </table>
+        </div>
+      </div>
+    
+      <div class="tab-pane fade" id="refer" role="tabpanel" aria-labelledby="refer-tab">
+    
+        
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Points</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for user in rusers %}
+                  <tr>
+                    <th scope="row">{{ forloop.counter }}</th>
+                    <td>{{user.user.full_name}}</td>
+                    <td>{{user.total_referrals}}</td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+            </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

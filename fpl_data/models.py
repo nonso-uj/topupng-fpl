@@ -9,6 +9,7 @@ class Token(models.Model):
     t_id = models.CharField(max_length=5 ,verbose_name='Transaction ID', unique=True)
     user = models.ForeignKey(fplUser, on_delete=models.SET_NULL, null=True)
     used = models.BooleanField(default=False)
+    date_created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return f"{self.t_id} for {self.user}"

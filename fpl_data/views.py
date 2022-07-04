@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.http import HttpResponse, JsonResponse
+from django.http import HttpResponse, JsonResponse, response
 from .forms import PredictionForm, TokenForm
+from django.core import serializers
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
@@ -21,15 +22,34 @@ def admin_dash(request):
     if not request.user.is_superuser:
         messages.warning(request, 'Access Denied')
         return redirect('home')
-    return render(request, 'admin-dash.html')
+    
+    users = fplUser.objects.all()
+    fusers = users.order_by('-total_points')
+    rusers = users.order_by('-total_referrals')
+
+    context = {
+        'fusers': fusers,
+        'rusers': rusers
+    }
+    return render(request, 'admin-dash.html', context)
+
+
+
+
+
+
+
+
 
 
 
 # puts json in dictionary for frontend
 def get_scores(request):
     if request.method == 'GET':
+        
         fixtures = []
         games = scores_data()
+
         for game in games['response']:
             if game['goals']['home'] == None or game['goals']['away'] == None:
                 game['goals']['home'] = '0'
@@ -46,26 +66,68 @@ def get_scores(request):
             })
 
         fixtures = fixtures[-20:]
+        # predictions = serializers.serialize('json', list(predictions))
         return JsonResponse({'fixtures':list(fixtures)})
+        # , 'predictions':predictions})
 
 
 
-# AUTOMATES API CALLS
+
+def get_predicts(request):
+    if request.method == 'GET':
+        user = fplUser.objects.get(user=request.user)
+        predictions = Prediction.objects.filter(user=user)
+
+        return JsonResponse({'predictions':list(predictions.values())})
+
+
+
+
+def user_predictions(request, pk):
+    if request.method == 'GET':
+        user = fplUser.objects.get(id=pk)
+        predictions = Prediction.objects.filter(user=user).order_by('-date_created')
+
+        return JsonResponse({'predictions':list(predictions.values())})
+
+
+
+
+
+
+# AUTOMATES API CALLS WITH AJAX AND USE FORM TO PASS IN TIME
 def scores_update(request):
-    schedule.every(10).seconds.until('08:10').do(get_data)
+    if request.method == 'GET':
+        schedule.clear()
+        messages.success(request, 'Updates stopped successfully THIS TIME')
+        return redirect('admin-dash')
+    if request.method == 'POST':
+        until = request.POST.get('until')
+        print(until)
+        schedule.every(10).seconds.until(until).do(get_data)
 
-    x = 0
-    while True:
-        schedule.run_pending()
-        print('running scores func...')
-        print(x)
-        x += 1
-        if x == 20:
-            break
-        time.sleep(11)
-    messages.success(request, 'Updates started successfully')
+        x = 0
+        while True:
+            schedule.run_pending()
+            print('running scores func...')
+            print(x)
+            x += 1
+            if x == 20:
+                break
+            time.sleep(11)
+        # messages.success(request, 'Updates started successfully')
+        # return redirect('admin-dash')
+        return JsonResponse({'result':'Updates started successfully'})
+    schedule.clear()
+    messages.success(request, 'Updates stopped successfully')
     return redirect('admin-dash')
-    
+    # return JsonResponse({'result':'Something went wrong'})
+
+
+def stop_calls(request):
+    schedule.clear()
+    messages.success(request, 'Updates stopped successfully')
+    return redirect('admin-dash')
 
 
 
@@ -120,16 +182,20 @@ def points_view(request):
 
 
 # HOME VIEW FUNC
-# AUTOMATE ADDING SCORES WITHOUT RELOAD WITH AJAX
-# make more efficient, always going through all users, bad performance
-@login_required(login_url='login')
+# AUTOMATE ADDING SCORES WITHOUT RELOAD WITH  done
+# make more efficient, always going through all users, bad performance done
+# @login_required(login_url='login')
 def home_view(request):
     form = TokenForm()
-    user = fplUser.objects.get(user=request.user)
+
+    predictions = []
+    if request.user.is_authenticated:
+        user = fplUser.objects.get(user=request.user)
+        predictions = Prediction.objects.filter(user=user)
+
     users = fplUser.objects.all()
     fusers = users.order_by('-total_points')
     rusers = users.order_by('-total_referrals')
-    predictions = Prediction.objects.filter(user=user)
 
     fixtures = []
     games = scores_data()
@@ -177,6 +243,7 @@ def predictor_view(request, pk):
                 'home_name' :game['teams']['home']['name'],
                 'away_logo' :game['teams']['away']['logo'],
                 'away_name' :game['teams']['away']['name'],
+                'link': reverse('predict', args=[game['fixture']['id']])
             })
 
     if request.method == 'POST':
@@ -184,15 +251,18 @@ def predictor_view(request, pk):
         try:
             predicted = Prediction.objects.get(user = user, fixture_id=pk)
             if predicted:
-                messages.success(request, 'You can only predict a game once')
-                return redirect('home')
+                # messages.success(request, 'You can only predict a game once')
+                # return redirect('home')
+                return JsonResponse({'result':'You can only predict a game once', 'class':'danger'})
         except ObjectDoesNotExist:
             form = PredictionForm(request.POST)
             if form.is_valid():
                 token = Token.objects.filter(user__exact=user,used__exact=False).first()
                 if token == None:
-                    messages.success(request, 'Please add more transaction ids from Topup.ng to continue predicting')
-                    return redirect('home')
+                    # messages.success(request, 'Please add more transaction ids from Topup.ng to continue predicting')
+                    # return redirect('home')
+
+                    return JsonResponse({'result':'Please add more transaction ids from Topup.ng to continue predicting', 'class':'danger'})
                 else:
                     token.used = True
                     token.save()
@@ -210,14 +280,21 @@ def predictor_view(request, pk):
                 prediction.token = token
                 prediction.is_active = True
                 prediction.save()
-                messages.success(request, 'Your prediction has been added successfully')
-                return redirect('home')
+                # messages.success(request, 'Your prediction has been added successfully')
+                # return redirect('home')
+                
+                return JsonResponse({'result':'Your prediction has been added successfully', 'class':'success'})
+            else:
+                return JsonResponse({'result':'Invalid Form', 'class':'danger'})
+
 
     context = {
         'form': form,
         'fixture': fixture
     }
-    return render(request, 'predict.html', context)
+    return JsonResponse({'fixture': list(fixture)})
+    # return HttpResponse(form)
+    # return render(request, 'predict.html', context)
 
 
 
@@ -234,7 +311,7 @@ def transaction_id_view(request):
         try:
             token = Token.objects.get(t_id=token)
             if token:
-                messages.success(request, 'This Transaction id has been used already, please check your spelling or try another')
+                # messages.success(request, 'This Transaction id has been used already, please check your spelling or try another')
                 return JsonResponse({'result':'used'})
         except ObjectDoesNotExist:
             if form.is_valid():
@@ -243,4 +320,7 @@ def transaction_id_view(request):
                 token.user = user
                 token.save()
                 return JsonResponse({'result':'success'})
+            else:
+                return JsonResponse({'result':'error'})
+        return JsonResponse({'result':'error'})
 

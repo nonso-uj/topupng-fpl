@@ -6,46 +6,149 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+    
     <link rel="stylesheet" href="{% static 'css/all.css' %}">
     <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/template.css' %}">
 
     <title>Document</title>
 </head>
 <body>
 
   {% include 'navbar.html' %}
-    
-  <div class="container">
+  
 
-        
-
-        <div id="toaster">
-          {% for message in messages %}
-          <div id="showToast" class="toast w-100 align-items-center" role="alert" aria-live="assertive" aria-atomic="true">
-              <div class="d-flex w-100">
-                <div class="toast-body">
-                  <p id="messages">{{message}}</p>
-              </div>
-                <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
-              </div>
-            </div>
-          {% endfor %}
+  <div class="container mx-auto" id="toaster">
+    {% for message in messages %}
+    <div id="showToast" class="toast w-100 align-items-center" role="alert" aria-live="assertive" aria-atomic="true">
+      <div class="d-flex w-100">
+        <div class="toast-body">
+          <p id="messages">{{message}}</p>
         </div>
-
-
-        {% block content %}
-        
-        {% endblock %}
+        <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+      </div>
     </div>
+    {% endfor %}
+  
+  </div>
+    
+
+  {% block content %}
+  
+  {% endblock %}
 
 
-    <script src="{% static 'js/jquery.js' %}"></script>
-    <script src="{% static 'js/bootstrap.bundle.js' %}"></script>
-    <script src="{% static 'js/main.js' %}"></script>
-    <script>
-     
 
-    </script>
+<!--============================
+=            Footer            =
+=============================-->
+
+<footer class="footer section section-sm">
+  <!-- Container Start -->
+  <div class="container pt-5">
+    <div class="row">
+      <div class="col-lg-3 col-md-7 offset-md-1 offset-lg-0 mb-4 mb-lg-0 text-light">
+        <!-- About -->
+        <div class="block about">
+          <!-- footer logo -->
+          <h3>FPL</h3>
+          <!-- description -->
+          <p class="alt-color">Don't discard your receipts when you pay your bills with Paga or Topup.ng </p>
+          <p> Use the transaction ID on your receipts to predict Games and win FREE 3GB DATA</p>
+        </div>
+      </div>
+      <!-- Link list -->
+      <div class="col-lg-4 offset-lg-2 col-md-6 col-12 mb-4 mb-lg-0">
+        <div class="block">
+          <h4>Site Pages</h4>
+          <ul>
+            <li>
+              <a href="{% url 'home' %}">Home</a>
+            </li>
+            {% if user.is_authenticated %}
+            <li>
+              <a href="{% url 'logout' %}">Logout</a>
+            </li>
+            {% else %}
+            <li>
+              <a href="{% url 'login' %}">Login</a>
+            </li>
+            <li>
+              <a href="{% url 'reg' %}">Registration</a>
+            </li>
+            {% endif %}
+            
+            {% if user.is_superuser %}
+            <li>
+              <a href="{% url 'admin-dash' %}">Admin</a>
+            </li>
+            {% endif %}
+          </ul>
+        </div>
+      </div>
+      <!-- Link list -->
+      <!-- Promotion -->
+      <div class="col-lg-4 col-md-7">
+        <!-- App promotion -->
+        <div class="block-2 app-promotion">
+          <div class="mobile d-flex  align-items-center">
+            <a href="index.html">
+              <!-- Icon -->
+              <img src="images/footer/phone-icon.png" alt="mobile-icon">
+            </a>
+            <p class="mb-0">Get the Paga Mobile App and Save more</p>
+          </div>
+          <div class="download-btn d-flex my-3">
+            <a href="index.html"><img src="images/apps/google-play-store.png" class="img-fluid" alt=""></a>
+            <a href="index.html" class=" ml-3"><img src="images/apps/apple-app-store.png" class="img-fluid" alt=""></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Container End -->
+</footer>
+<!-- Footer Bottom -->
+<footer class="footer-bottom">
+  <!-- Container Start -->
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-6 text-center text-lg-left mb-3 mb-lg-0">
+        <!-- Copyright -->
+        <div class="copyright">
+          <p>Copyright &copy; <script>
+              var CurrentYear = new Date().getFullYear()
+              document.write(CurrentYear)
+            </script>. Designed & Developed by Nonso <a class="d-none text-white" href="https://themefisher.com">Themefisher</a></p>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <!-- Social Icons -->
+        <ul class="social-media-icons text-center text-lg-right">
+          <li><a class="fa fa-facebook"></a></li>
+          <li><a class="fa fa-twitter"></a></li>
+          <li><a class="fa fa-pinterest-p"></a></li>
+          <li><a class="fa fa-github-alt"></a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <!-- Container End -->
+  <!-- To Top -->
+  <div class="scroll-top-to">
+    <i class="fa fa-angle-up"></i>
+  </div>
+</footer>
+
+
+
+
+  <script src="{% static 'js/jquery.js' %}"></script>
+  <script src="{% static 'js/bootstrap.bundle.js' %}"></script>
+  <script src="{% static 'js/main.js' %}"></script>
+
+
 </body>
 </html>

@@ -1,36 +1,70 @@
-<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+<!-- ======= Header ======= -->
+<header id="header" class="fixed-top">
+ <!-- <div class="container d-flex align-items-center"> -->
+
+  <nav class="navbar navbar-expand-md navbar-dark">
     <div class="container">
-      <a class="navbar-brand" href="{% url 'home' %}">FPL</a>
+      <a class="navbar-brand" href="{% url 'home' %}">
+        FPL    <span class="lead ms-5 d-none d-md-inline-block">Hi {{ request.user.first_name }}</span>
+      </a>
+      <a href="https://google-play-store" class="topupBtn appointment-btn scrollto ms-md-5 ms-2 btn btn-info rounded-pill"><span class="d-none d-lg-inline-block">Get the </span> Paga App</a>
+      <a href="https://topup.ng" class="topupBtn appointment-btn scrollto ms-md-5 ms-2 btn btn-info rounded-pill"> <span class="d-none d-lg-inline-block">Proceed to </span>Topup.ng</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarCollapse">
-        <ul class="navbar-nav me-auto mb-2 mb-md-0 justify-content-end">
+        <ul class="navbar-nav ms-auto mb-2 mb-md-0">
           <li class="nav-item">
-            <a class="nav-link {% block activeHome %} {% endblock %}" href="{% url 'home' %}">Home</a>
+            <a class="nav-link text-light {% block activeHome %} {% endblock %}" href="{% url 'home' %}">Home</a>
           </li>
           {% if user.is_authenticated %}
           <li class="nav-item">
-            <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+            <a class="nav-link text-light" href="{% url 'logout' %}">Logout</a>
           </li>
           {% else %}
           <li class="nav-item">
-            <a class="nav-link {% block activeLogin %}  {% endblock %}" href="{% url 'login' %}">Login</a>
+            <a class="nav-link text-light {% block activeLogin %}  {% endblock %}" href="{% url 'login' %}">Login</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link {% block activeReg %}  {% endblock %}" href="{% url 'reg' %}">Registration</a>
+            <a class="nav-link text-light {% block activeReg %}  {% endblock %}" href="{% url 'reg' %}">Registration</a>
           </li>
           {% endif %}
           
           {% if user.is_superuser %}
           <li class="nav-item">
-            <a class="nav-link" href="{% url 'admin-dash' %}">Admin</a>
+            <a class="nav-link text-light" href="{% url 'admin-dash' %}">Admin</a>
           </li>
           {% endif %}
         </ul>
       </div>
     </div>
   </nav>
+
+
+ <!-- </div> -->
+</header><!-- End Header -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

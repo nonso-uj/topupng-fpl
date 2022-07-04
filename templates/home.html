@@ -1,222 +1,281 @@
 {% extends 'base.html' %}
 
+{% load static %}
+
 {% block activeHome %} active {% endblock %}
 
 {% block content %}
 
 
-<div class="w-100 mb-3 mt-5" id="form-div">
-  <h4 class="text-center">ADD NEW TRANSACTION ID</h4>
+
+<div class="container-fluid text-light" id="overForm">
+  <div id="form-div">
+
+  </div>
+  <div class="w-100 mb-3 mt-5 text-center" id="formHolder">
+    <h4>Don't discard your receipts when you pay your bills with Paga or Topup.ng</h4>
+    <h5 class="mb-3">Use the transaction ID on your receipts to predict Games and win FREE 3GB DATA</h5>
+
+    <h4 class="">ADD NEW TRANSACTION ID</h4>
     <div class="pt-3 text-center">
-        <form action="" method="POST" id="tokenForm" data-url="{% url 'tid' %}">
-            {% csrf_token %}
-            <!-- <input type="text" name="user" value="" hidden> -->
-            {{ form.t_id }}
-            <input type="submit" class="btn btn-md btn-block btn-primary w-25 mx-auto mt-3" value="Submit">
-        </form>
+      <form action="" method="POST" id="tokenForm" data-url="{% url 'tid' %}">
+        {% csrf_token %}
+        
+        {{ form.t_id }}
+        
+        <input id="tidSubmit" type="submit" class="btn btn-md btn-block btn-primary mx-auto mt-3" value="Submit">
+      </form>
     </div>
+  </div>
 </div>
 
+<!-- AJAX TESTING BUTTON -->
+<!-- <button id="getpres" class="btn btn-lg btn-info">get pres</button> -->
 
+<div class="container px-5-md px-5-sm">
 
+  <div id="tabPanes">
+    
+    <ul class="nav nav-tabs nav-fill" id="myTab" role="tablist">
+      
+      <li class="nav-item" role="presentation">
+        <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">All Fixtures</button>
+      </li>
+    
+      <li class="nav-item" id="predictGet" role="presentation" data-mypredict="{% url 'get-predicts' %}">
+        <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">My Predictions</button>
+      </li>
+      
+    </ul>
+    
+    <div class="tab-content" id="myTabContent">
+      <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+            
+        <span id="fixtures-list" data-url="{% url 'get-scores' %}">
+            
+          <div class="table-responsive">
+              <table class="table text-center table-hover table-borderless">
+                  <thead class="table-light">
+                      <tr>
+                      <th scope="col" class="py-3">Home</th>
+                      <th scope="col" class="py-3">Goals</th>
+                      <th scope="col" class="py-3">Away</th>
+                      <th scope="col" class="py-3"></th>
+                      </tr>
+                  </thead>
+                  <tbody id="myTable">
+                    {% for fixture in fixtures %}
+                      <tr>
+                      <td class="py-3">
+                        <img src="{{ fixture.home_logo }}" alt="club-logo"> 
+                        <b>{{ fixture.home_name }}</b> 
+                      </td>
+                      <td class="py-3 goals">
+                        <span id="{{ fixture.fixture_id }}">  {{ fixture.home_goals }} <b>vs</b> {{ fixture.away_goals }} </span>
+                      </td>
+                      <td class="py-3">
+                        <b>{{ fixture.away_name }}</b>  
+                        <img src="{{ fixture.away_logo }}" alt="club-logo">
+                      </td>
+                      <td class="py-3">
+                        <a class="btn btn-sm btn-primary mx-auto predictBtn" href="{{fixture.link}}"  data-bs-toggle="modal" data-bs-target="#modalPredict">Predict</a>
+                      </td>
+                      </tr>
+                      {% endfor %}
+                  </tbody>
+              </table>
+          </div>
+        </span>
 
-
-<ul class="nav nav-tabs nav-fill" id="myTab" role="tablist">
+      </div>
   
-  <li class="nav-item" role="presentation">
-    <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">All Fixtures</button>
-  </li>
+      
+      
+      <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+    
+        <div class="table-responsive">
+          <table class="table text-center table-hover table-borderless">
+            <thead class="table-light">
+              <tr>
+                <th scope="col" class="py-3">#</th>
+                <th scope="col" class="py-3">Home</th>
+                <th scope="col" class="py-3">Goals</th>
+                <th scope="col" class="py-3">Away</th>
+                <th scope="col" class="py-3">Points</th>
+              </tr>
+            </thead>
+            <tbody id="myTable">
+              {% if user.is_authenticated %}
 
-  <li class="nav-item" role="presentation">
-    <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">My Predictions</button>
-  </li>
-  
-</ul>
+              {% if predictions %}
 
-<div class="tab-content" id="myTabContent">
-  <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-        
-        <ul id="fixtures-list" class="list-group list-group-flush" data-url="{% url 'get-scores' %}">
-          {% for fixture in fixtures %}
+              {% for prediction in predictions %}
+              <tr>
+                <th scope="row" class="py-3">{{ forloop.counter }}</th>
+                <td class="py-3">
+                  <img src="{{ prediction.home_logo }}" alt="club-logo"> 
+                  <b>{{prediction.home_name}}</b> 
+                </td>
+                <td class="py-3 goals">
+                  <span id="{{ prediction.fixture_id }}">  {{prediction.home_goals}} <b>vs</b> {{prediction.away_goals}} </span>
+                </td>
+                <td class="py-3">
+                  <b>{{ prediction.away_name }}</b>  
+                  <img src="{{ prediction.away_logo }}" alt="club-logo">
+                </td>
+                <td class="py-3">{{ prediction.points }}</td>
+              </tr>
+              {% endfor %}
 
-          <li class="list-group-item text-center lead py-4">
-              <div class="row">
-                  <div class="col-9">
-                      <img src="{{ fixture.home_logo }}" alt="club-logo"> <b>{{ fixture.home_name }}</b> <span id="'scores">  {{ fixture.home_goals }} <b>vs</b> {{ fixture.away_goals }} </span> <b>{{ fixture.away_name }}</b>  <img src="{{ fixture.away_logo }}" alt="club-logo">
-                  </div>
-                  <div class="col-3">
-                      <a class="btn btn-sm btn-primary ms-auto" href="{% url 'predict' fixture.fixture_id %}">Predict</a>
+              {% else %}
+              
+              <h1>Nothing to see here</h1>
+              <h4>Please add your transaction ID to start predicting</h4>
+              
+              {% endif %}
+              
+
+              {% else %}
+              <tr>
+                <td colspan="5"><h1>Please login to see you predictions</h1></td>
+              </tr>
+              {% endif %}
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+
+      
+      <div class="modal" tabindex="-1" id="modalPredict">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title text-center">Predict</h5>
+                <button type="button" id="closePredict" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+      
+                <div class="card">
+                  <div class="card-body">
+                      <form action="" method="POST" id="predictForm">
+                          {% csrf_token %}
+          
+                          <span id="formElems">
+                            
+                          </span>
+                          
+          
+                          <input type="submit" class="btn btn-md btn-block btn-primary w-100 mx-auto" value="Submit">
+                      </form>
                   </div>
               </div>
-              
-          </li>
-
-          {% endfor %}
-        </ul>
-  </div>
-  <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">...</div>
-</div>
-
-
-<br><br><br><br><br><br><br><br><br><br><br><br>
-
-
-
-
-
-
-<div class="my-4 pt-3">
-    <span class="h4 my-4 me-5">Hello, {{ request.user.first_name }}</span>
-</div>
-
-
-<div class="card">
-  <h1 class="text-center my-5">ADD NEW TRANSACTION ID</h1>
-    <div class="card-body pt-5 text-center">
-        <form action="" method="POST" id="tokenForm" data-url="{% url 'tid' %}">
-            {% csrf_token %}
-            <!-- <input type="text" name="user" value="" hidden> -->
-            {{ form }}
-            <input type="submit" class="btn btn-md btn-block btn-primary w-100 mx-auto mt-5" value="Submit">
-        </form>
-    </div>
-</div>
-
-
-
-<div class="card">
-    <div class="card-body">
-        <button type="button" class="btn btn-lg btn-primary text-light w-100" data-bs-toggle="modal" data-bs-target="#modalPredictions">
-            Your Predictions
-          </button>
-    </div>
-  </div>
-
-
-
-
-
-<div class="modal" tabindex="-1" id="modalPredictions">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title text-center">All Your Predictions</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-
-
-            <div class="table-responsive">
-                <table class="table text-center table-hover table-borderless">
-                    <thead class="table-dark">
-                        <tr>
-                        <th scope="col" class="py-3">#</th>
-                        <th scope="col" class="py-3">Prediction</th>
-                        <th scope="col" class="py-3">Points</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for prediction in predictions %}
-                        <tr>
-                        <th scope="row" class="py-3">{{ forloop.counter }}</th>
-                        <td class="py-3">
-                            <img src="{{ prediction.home_logo }}" alt="club-logo">
-
-                             <b>{{prediction.home_name}}</b>
-                             
-                             {{prediction.home_goals}} 
-
-                             <b>vs</b>
-                            
-                             {{prediction.away_goals}}
-
-                             <b>{{ prediction.away_name }}</b> 
-
-                             <img src="{{ prediction.away_logo }}" alt="club-logo">
-                        </td>
-                        <td class="py-3">{{ prediction.points }}</td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
+                  
+      
+      
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              </div>
             </div>
+          </div>
+      </div>
+      
+      
+    </div>
+
+  </div>
+
+  
 
 
+
+
+
+
+
+
+  
+  <br><br>
+
+
+
+
+
+
+
+
+
+  <div class="my-5 pb-5">
+    <h1 class="text-center">RANKINGS</h1>
+  
+    <ul class="nav nav-tabs nav-fill" id="myTab" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button class="nav-link active" id="rank-tab" data-bs-toggle="tab" data-bs-target="#rank" type="button" role="tab" aria-controls="rank" aria-selected="true">FPL POINTS</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="refer-tab" data-bs-toggle="tab" data-bs-target="#refer" type="button" role="tab" aria-controls="refer" aria-selected="false">REFERRALS</button>
+      </li>
+    </ul>
+    
+    
+    <div class="tab-content mt-3" id="myTabContent">
+      <div class="tab-pane fade show active" id="rank" role="tabpanel" aria-labelledby="rank-tab">
+    
+        
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Points</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for user in fusers %}
+                  <tr>
+                    <th scope="row">{{ forloop.counter }}</th>
+                    <td>{{user.user.full_name}}</td>
+                    <td>{{user.total_points}}</td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+            </table>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    
+      <div class="tab-pane fade" id="refer" role="tabpanel" aria-labelledby="refer-tab">
+    
+        
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Points</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for user in rusers %}
+                  <tr>
+                    <th scope="row">{{ forloop.counter }}</th>
+                    <td>{{user.user.full_name}}</td>
+                    <td>{{user.total_referrals}}</td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+            </table>
         </div>
       </div>
     </div>
   </div>
-
-
-
-
-
-
-
-
-
-
-<div class="container">
-    <h1 class="text-center mt-5">RANKINGS</h1>
-    
-    
-    <h3 class="text-center mt-5">FPL POINTS</h3>
-    
-    <div class="table-responsive">
-        <table class="table table-hover">
-            <thead>
-              <tr>
-                <th scope="col">#</th>
-                <th scope="col">Name</th>
-                <th scope="col">Points</th>
-              </tr>
-            </thead>
-            <tbody>
-              {% for user in fusers %}
-              <tr>
-                <th scope="row">{{ forloop.counter }}</th>
-                <td>{{user.user.full_name}}</td>
-                <td>{{user.total_points}}</td>
-              </tr>
-              {% endfor %}
-            </tbody>
-        </table>
-    </div>
 </div>
+  
 
 
 
-
-<div class="container">
-    <h3 class="text-center mt-5">REFERRALS</h3>
-    
-    <div class="table-responsive">
-        <table class="table table-hover">
-            <thead>
-              <tr>
-                <th scope="col">#</th>
-                <th scope="col">Name</th>
-                <th scope="col">Points</th>
-              </tr>
-            </thead>
-            <tbody>
-              {% for user in rusers %}
-              <tr>
-                <th scope="row">{{ forloop.counter }}</th>
-                <td>{{user.user.full_name}}</td>
-                <td>{{user.total_referrals}}</td>
-              </tr>
-              {% endfor %}
-            </tbody>
-        </table>
-    </div>
-</div>
-
-
-    
       
 
 

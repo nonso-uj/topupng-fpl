@@ -10,6 +10,44 @@ User = get_user_model()
 
 
 class CustomUserCreationForm(UserCreationForm):
+    email = forms.CharField(widget=forms.EmailInput(
+        attrs={
+            'class':'form-control mb-3',
+            'maxlength': "255",
+            'placeholder':"Email*",
+        }))
+            # 'autofocus': "",
+    first_name = forms.CharField(widget=forms.TextInput(
+        attrs={
+            'class':'form-control mb-3',
+            'maxlength': "100",
+            'placeholder':"First Name*",
+        }))
+    last_name = forms.CharField(widget=forms.TextInput(
+        attrs={
+            'class':'form-control mb-3',
+            'maxlength': "100",
+            'placeholder':"Last Name*",
+        }))
+    phone = forms.CharField(widget=forms.NumberInput(
+        attrs={
+            'class':'form-control mb-3',
+            'maxlength': "255",
+            'placeholder':"Phone Number*",
+        }))
+    password1 = forms.CharField(widget=forms.PasswordInput(
+        attrs={
+            'class':'form-control mb-3',
+            'autocomplete':"new-password",
+            'placeholder':"Password*",
+        }))
+            # 'maxlength': "255",
+    password2 = forms.CharField(widget=forms.PasswordInput(
+        attrs={
+            'class':'form-control mb-3',
+            'autocomplete':"new-password",
+            'placeholder':"Confirm Password*",
+        }))
     class Meta(UserCreationForm.Meta):
         model = User
         fields = UserCreationForm.Meta.fields + ('email', 'first_name', 'last_name', 'phone',)

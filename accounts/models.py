@@ -58,7 +58,7 @@ class MyUser(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(max_length=255, unique=True)
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
-    phone = models.IntegerField()
+    phone = models.IntegerField(unique=True)
     confirmed = models.BooleanField(default=False, null=True, blank=True)
     confirmed_date = models.DateField(null=True, blank=True)
     date_created = models.DateTimeField(auto_now_add=True)
