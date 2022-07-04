@@ -310,21 +310,22 @@ def transaction_id_view(request):
     form = TokenForm()
 
     if request.method == 'POST':
+        if not request.user.is_authenticated:
+            return JsonResponse({'result':'you must login to submit a token'})
         form = TokenForm(request.POST)
         token = request.POST.get('t_id')
         try:
             token = Token.objects.get(t_id=token)
             if token:
-                # messages.success(request, 'This Transaction id has been used already, please check your spelling or try another')
-                return JsonResponse({'result':'used'})
+                return JsonResponse({'result':'This Transaction id has been used already, please check your spelling or try another'})
         except ObjectDoesNotExist:
             if form.is_valid():
                 token = form.save(commit=False)
                 user = fplUser.objects.get(user=request.user)
                 token.user = user
                 token.save()
-                return JsonResponse({'result':'success'})
+                return JsonResponse({'result':'YourTransaction id was added successfully'})
             else:
-                return JsonResponse({'result':'error'})
-        return JsonResponse({'result':'error'})
+                return JsonResponse({'result':'Invalid input please try again'})
+        return JsonResponse({'result':'Invalid input please try again'})
 

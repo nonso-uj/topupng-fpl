@@ -20,16 +20,7 @@ $(function(){
                 csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
             },
             success: function(response){
-                if(response.result == 'success'){
-                    var message = 'YourTransaction id was added successfully'
-                }
-                else if(response.result == 'used'){
-                    var message = 'This Transaction id has been used already, please check your spelling or try another'
-                }
-                else if(response.result == 'error'){
-                    var message = "Invalid input please try again"
-                }
-
+                var message = response.result
                 var toastBody = `
                 <div id='toasty'  class="toast w-100 align-items-center mx-auto bg-white" role="alert" aria-live="assertive" aria-atomic="true">
                 <div class="d-flex w-100">
