@@ -1,0 +1,145 @@
+#tabPanes img{
+    width: 2rem;
+    height: auto;
+}
+
+
+
+#overForm{
+    position: relative;
+    margin: 0 0 0 0 !important;
+    padding: 0 0 0 0;
+    background-image: "url({% static 'images/hero.jpg' %})";
+    background-position: center;
+    background-size: cover;
+}
+
+
+
+#form-div{
+    height: 75vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+
+
+#formHolder{
+    position: absolute;
+    top: 6rem;
+    height: 100%;
+}
+
+#formHolder h4, #formHolder h5{
+    text-shadow: 0 0 3px #000;
+    font-size: 1.5rem;
+    color: #fff;
+}
+
+#formHolder input{
+    border-style: hidden;
+    box-shadow: 0 0 3px #000;
+}
+
+.toast{
+    box-shadow: 5px 5px 5px #000;
+}
+
+#toaster{
+    position: fixed;
+    top: 4rem;
+    z-index: 10;
+}
+
+
+
+#tabPanes{
+    position: relative;
+    top: -5rem;
+    background-color: #fff;
+    border-top-right-radius: 20px;
+    border-top-left-radius: 20px;
+}
+
+#myTab button{
+    font-size: 1.5rem;
+    padding: 10px;
+    border-style: hidden;
+}
+
+/* .navbar-toggler{ */
+    /* color: #fff !important; */
+    /* background-color: #fff; */
+    /* border: 1px solid #fff; */
+/* } */
+
+/* .navbar-toggler span{ */
+    /* color: #fff !important; */
+    /* background-color: #fff; */
+    /* border: 1px solid #fff; */
+/* } */
+
+
+.login-container{
+    margin-top: 10rem;
+    margin-bottom: 10rem;
+}
+
+
+
+
+#modal-content{
+    width: 80vw;
+    height: auto;
+}
+
+#myTab .active, .predictBtn, #tidSubmit, .navbar, .navbar a, .submitBtn{
+    background-color: #fd7e14;
+    color: #fff;
+    border-style: none;
+}
+
+.topupBtn{
+    background-color: #fff !important;
+    color: #fd7e14 !important;
+}
+
+button[aria-selected="false"]{
+    color: #fd7e14;
+}
+
+
+
+
+.goals{
+    font-size: 0.9rem;
+}
+
+#home-tab, #rank-tab{
+    border-top-left-radius: 20px;
+    border-top-right-radius: 0px;
+}
+
+
+#profile-tab, #refer-tab{
+    border-top-right-radius: 20px;
+    border-top-left-radius: 0px;
+}
+
+
+@media (max-width: 768px) {
+    #tabPanes img{
+        width: 1.5rem;
+        height: auto;
+    }
+
+    #formHolder{
+        position: absolute;
+        top: 4rem;
+    }
+
+    #formHolder h4, #formHolder h5{
+        font-size: 1rem;
+    }
+}
