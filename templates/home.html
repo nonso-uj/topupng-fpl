@@ -137,7 +137,7 @@
 
               {% else %}
               <tr>
-                <td colspan="5"><h1>Please login to see your predictions</h1></td>
+                <td colspan="5"><h1>Please <a href="{% url 'login' %}">Login</a> to see your predictions</h1></td>
               </tr>
               {% endif %}
             </tbody>

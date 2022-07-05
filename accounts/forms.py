@@ -35,6 +35,11 @@ class CustomUserCreationForm(UserCreationForm):
             'class':'form-control mb-3',
             'placeholder':"Phone Number*",
         }))
+    referrer = PhoneNumberField(widget=forms.NumberInput(
+        attrs={
+            'class':'form-control',
+            'placeholder':"Referrers Phone Number*",
+        }))
     password1 = forms.CharField(widget=forms.PasswordInput(
         attrs={
             'class':'form-control mb-3',

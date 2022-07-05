@@ -1,3 +1,4 @@
+from enum import unique
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 from phonenumber_field.modelfields import PhoneNumberField
@@ -59,7 +60,7 @@ class MyUser(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(max_length=255, unique=True)
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
-    phone = PhoneNumberField()
+    phone = PhoneNumberField(unique=True)
     confirmed = models.BooleanField(default=False, null=True, blank=True)
     confirmed_date = models.DateField(null=True, blank=True)
     date_created = models.DateTimeField(auto_now_add=True)

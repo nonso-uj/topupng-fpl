@@ -26,7 +26,7 @@ def referrer_num(request, refer):
         return referrer
     except ObjectDoesNotExist:
         messages.info(request, 'Referrers phone number incorrect or does not exist')
-        return redirect('reg')
+        # return redirect('reg')
 
 
 
@@ -40,29 +40,31 @@ def reg_view(request):
         form = CustomUserCreationForm(request.POST)
         if form.is_valid():
             user = form.save(commit=False)
-            refer = request.POST.get('referrer')
-            if refer is not None:
-                referrer = referrer_num(request, refer)
             user.is_active = False
             user.save()
             fpl_user = fplUser.objects.create(user=user)
-            if referrer:
-                fpl_user.referrer = referrer
+            refer = request.POST.get('referrer')
+            if refer is not None and refer != '':
+                print(refer)
+                referrer = referrer_num(request, refer)
+                if referrer is not None:
+                    print(referrer)
+                    fpl_user.referrer = referrer
             fpl_user.save()
 
             # SEND MAIL PART
-            # current_site = get_current_site(request)
-            # mail_subject = 'Activate your account'
-            # # make better template
-            # message = render_to_string('active_email.html', {
-            #     'user': user,
-            #     'domain': current_site.domain,
-            #     'uid': urlsafe_base64_encode(force_bytes(user.id)),
-            #     'token': account_activation_token.make_token(user),
-            # })
-            # to_email = form.cleaned_data.get('email')
-            # # add company email
-            # send_mail(mail_subject, message, 'nonso.udonne@gmail.com', [to_email])
+            current_site = get_current_site(request)
+            mail_subject = 'Activate your account'
+            # make better template
+            message = render_to_string('active_email.html', {
+                'user': user,
+                'domain': current_site.domain,
+                'uid': urlsafe_base64_encode(force_bytes(user.id)),
+                'token': account_activation_token.make_token(user),
+            })
+            to_email = form.cleaned_data.get('email')
+            # add company email
+            send_mail(mail_subject, message, 'nonso.udonne@gmail.com', [to_email])
 
             messages.info(request, 'Account registration successfull, Please confirm your email to Login')
             return redirect('login')

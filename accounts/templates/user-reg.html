@@ -21,9 +21,13 @@
                 {{ form.last_name }}
 
                 {{ form.phone }}
-
-                <input type="number" name="referrer" class="form-control" placeholder="Referrers Phone Number">
-                <span class="form-text text-warning mb-3">optional</span>
+                
+                <!-- <input type="number" name="referrer" class="form-control" placeholder="Referrers Phone Number"> -->
+                <div class="form-group mb-3">
+                  {{ form.referrer }}
+                <span class="form-text text-danger">*optional</span>
+                </div>
+                
 
                 {{ form.password1 }}
 
