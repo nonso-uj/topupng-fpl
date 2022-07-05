@@ -21,7 +21,6 @@ User = get_user_model()
 
 def referrer_num(request, refer):
     try:
-        print(refer)
         referrer = User.objects.get(phone=refer)
         referrer = fplUser.objects.get(user=referrer)
         return referrer
@@ -46,7 +45,8 @@ def reg_view(request):
             user.is_active = False
             user.save()
             fpl_user = fplUser.objects.create(user=user)
-            fpl_user.referrer = referrer
+            if referrer:
+                fpl_user.referrer = referrer
             fpl_user.save()
 
             # SEND MAIL PART

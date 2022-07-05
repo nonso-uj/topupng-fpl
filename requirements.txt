@@ -10,6 +10,7 @@ Django==3.2.13
 django-extensions==3.1.5
 django-filter==21.1
 django-on-heroku==1.1.2
+django-phonenumber-field==6.3.0
 django-storages==1.12.3
 django-utils-six==2.0
 gunicorn==20.1.0
@@ -19,6 +20,7 @@ itsdangerous==2.1.2
 Jinja2==3.1.2
 jmespath==1.0.1
 MarkupSafe==2.1.1
+phonenumberslite==8.12.51
 Pillow==9.1.1
 psycopg2==2.9.3
 psycopg2-binary==2.9.3

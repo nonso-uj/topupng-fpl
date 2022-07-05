@@ -2,6 +2,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from .models import fplUser
 from django.contrib.auth import get_user_model
+from phonenumber_field.formfields import PhoneNumberField
 
 User = get_user_model()
 
@@ -29,10 +30,9 @@ class CustomUserCreationForm(UserCreationForm):
             'maxlength': "100",
             'placeholder':"Last Name*",
         }))
-    phone = forms.CharField(widget=forms.NumberInput(
+    phone = PhoneNumberField(widget=forms.NumberInput(
         attrs={
             'class':'form-control mb-3',
-            'maxlength': "255",
             'placeholder':"Phone Number*",
         }))
     password1 = forms.CharField(widget=forms.PasswordInput(
