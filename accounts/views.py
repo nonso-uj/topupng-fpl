@@ -11,6 +11,7 @@ from .tokens import account_activation_token
 from django.core.mail import send_mail
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib import messages
+from django.urls import reverse
 
 from .models import fplUser
 User = get_user_model()
@@ -91,7 +92,8 @@ def activate(request, uidb64, token):
             user.fpluser.refer_valid = True
         user.save()
         # add login redirect and message to 
-        return HttpResponse('Thanks for email confirmation')
+        login_link = reverse('login')
+        return HttpResponse(f'<h1>Thanks for email confirmation</h1><p> Click {login_link} to go back</p>')
     else:
         return HttpResponse('Invalid Activation link')
 
