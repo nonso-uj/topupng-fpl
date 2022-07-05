@@ -41,7 +41,8 @@ def reg_view(request):
         if form.is_valid():
             user = form.save(commit=False)
             refer = request.POST.get('referrer')
-            referrer = referrer_num(request, refer)
+            if refer is not None:
+                referrer = referrer_num(request, refer)
             user.is_active = False
             user.save()
             fpl_user = fplUser.objects.create(user=user)
