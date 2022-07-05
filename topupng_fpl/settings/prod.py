@@ -35,7 +35,7 @@ ALLOWED_HOSTS = [
 # AWS_DEFAULT_ACL = 'public-read'
 
 # AWS_S3_OBJECT_PARAMETERS = {
-    'CacheControl': 'max-age=86400'
+#    'CacheControl': 'max-age=86400'
 # }
 
 # AWS_LOCATION = 'static'
