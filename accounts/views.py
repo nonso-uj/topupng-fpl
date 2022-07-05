@@ -93,7 +93,7 @@ def activate(request, uidb64, token):
         user.save()
         # add login redirect and message to 
         login_link = reverse('login')
-        return HttpResponse(f'<h1>Thanks for email confirmation</h1><p> Click {login_link} to go back</p>')
+        return HttpResponse(f'<h1>Thanks for email confirmation</h1><p> Click <a href="{reverse('login')}">here</a> to go back</p>')
     else:
         return HttpResponse('Invalid Activation link')
 
