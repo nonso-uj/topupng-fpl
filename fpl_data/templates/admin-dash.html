@@ -48,6 +48,7 @@
 
                                         {% csrf_token %}
                                         <label class="form-label" for="interval">Intervals</label>
+                                        <span class="form-text text-danger">*must be under 30s to avoid time out error and break connection</span>
                                         <input type="number" id="interval" class="form-control" name="interval" required>
 
                                         <label class="form-label" for="league">League: </label>

@@ -27,13 +27,15 @@ class StartSchedule:
             self.ender = 0
             interval = int(request.POST.get('interval'))
             print(interval)
-            schedule.every(interval).minutes.until("23:59").do(self.get_data, request)
+            # interval has to be under 30s
+            schedule.every(interval).seconds.until("23:59").do(self.get_data, request)
 
             while True:
                 schedule.run_pending()
                 print('running scores func...')
                 print(self.count)
-                if self.count == 90 or self.ender == 1:
+                if self.count == 2 or self.ender == 1:
+                    schedule.clear()
                     break
                 time.sleep(1)
             messages.success(request, 'Scores done')
