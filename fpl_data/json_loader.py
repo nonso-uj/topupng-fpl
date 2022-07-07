@@ -7,7 +7,7 @@ def get_data():
 
     querystring = {
         'league':'10',
-        'season':'2021',
+        'season':'2022',
         'date':'2022-07-07',
     }
 
