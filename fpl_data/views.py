@@ -6,7 +6,8 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 import json, os, schedule, time
-from .json_loader import scores_data, get_data
+from .json_loader import scores_data, StartSchedule
+# , get_data
 from django.urls import reverse
 
 
@@ -96,38 +97,19 @@ def user_predictions(request, pk):
 
 
 # AUTOMATES API CALLS WITH AJAX AND USE FORM TO PASS IN TIME
+begin  = StartSchedule()
 def scores_update(request):
-    if request.method == 'GET':
-        schedule.clear()
-        messages.success(request, 'Updates stopped successfully THIS TIME')
-        return redirect('admin-dash')
+    print('got here')
     if request.method == 'POST':
-        until = request.POST.get('until')
-        print(until)
-        schedule.every(10).seconds.until(until).do(get_data)
+        print('got here1')
+        begin.starter(request)
+        messages.success(request, 'Updates started successfully')
+        return redirect('admin-dash')
 
-        x = 0
-        while True:
-            schedule.run_pending()
-            print('running scores func...')
-            print(x)
-            x += 1
-            if x == 20:
-                break
-            time.sleep(11)
-        # messages.success(request, 'Updates started successfully')
-        # return redirect('admin-dash')
-        return JsonResponse({'result':'Updates started successfully'})
-    schedule.clear()
-    messages.success(request, 'Updates stopped successfully')
-    return redirect('admin-dash')
-    # return JsonResponse({'result':'Something went wrong'})
-
-
-def stop_calls(request):
-    schedule.clear()
-    messages.success(request, 'Updates stopped successfully')
-    return redirect('admin-dash')
+    if request.method == 'GET':
+        begin.starter(request)
+        messages.success(request, 'Updates stopped successfully')
+        return redirect('admin-dash')
 
 
 
@@ -199,6 +181,7 @@ def home_view(request):
 
     fixtures = []
     games = scores_data()
+    league_name = games['response'][0]['league']['name']
     for game in games['response']:
             if game['goals']['home'] == None or game['goals']['away'] == None:
                 game['goals']['home'] = '0'
@@ -220,7 +203,8 @@ def home_view(request):
         'fusers': fusers,
         'rusers': rusers,
         'form': form,
-        'fixtures': fixtures
+        'fixtures': fixtures,
+        'league_name': league_name
     }
     return render(request, 'home.html', context)
 

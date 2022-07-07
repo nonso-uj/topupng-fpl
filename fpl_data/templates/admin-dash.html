@@ -43,11 +43,23 @@
                             <div class="text-xs text-center font-weight-bold text-warning text-uppercase mb-1">
                                 START API CALLS</div>
                                 <div class="h5 mb-0 font-weight-bold text-gray-800 text-center">
-                                    <form action="" method="POST" data-admin="{% url 'scores' %}" id="adminForm">
+                                    <form action="{% url 'scores' %}" method="POST" data-admin="{% url 'scores' %}" id="adminForm">
+                                      <fieldset>
+
                                         {% csrf_token %}
-                                        <label for="until">Untill</label>
-                                        <input type="time" id="until" name="until" required>
+                                        <label class="form-label" for="interval">Intervals</label>
+                                        <input type="number" id="interval" class="form-control" name="interval" required>
+
+                                        <label class="form-label" for="league">League: </label>
+                                        <input type="number" class="form-control"  name="league" required>
+                                        
+                                        <label class="form-label" for="date">Date: </label>
+                                        <input type="date" class="form-control"  name="date">
+
+
                                         <input type="submit" value="Submit" class="btn btn-md btn-primary predictBtn">
+
+                                      </fieldset>
                                     </form>
                                 </div>
                         </div>
@@ -164,7 +176,6 @@
 
 
 
-        <!-- Pie Chart -->
         <div class="col-10 mx-auto">
             <div class="card shadow mb-4">
                 <!-- Card Header - Dropdown -->
