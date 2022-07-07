@@ -42,13 +42,13 @@
                         <div class="col mr-2">
                             <div class="text-xs text-center font-weight-bold text-warning text-uppercase mb-1">
                                 START API CALLS</div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800 text-center">
+                                <div class="h5 mb-0 font-weight-bold text-gray-800 text-start">
                                     <form action="{% url 'scores' %}" method="POST" data-admin="{% url 'scores' %}" id="adminForm">
                                       <fieldset>
 
                                         {% csrf_token %}
                                         <label class="form-label" for="interval">Intervals</label>
-                                        <span class="form-text text-danger">*must be under 30s to avoid time out error and break connection</span>
+                                        <span class="form-text text-danger d-block">*must be under 30s to avoid time out error and break connection</span>
                                         <input type="number" id="interval" class="form-control" name="interval" required>
 
                                         <label class="form-label" for="league">League: </label>
