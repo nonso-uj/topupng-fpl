@@ -222,8 +222,7 @@ $(function(){
 
 
 
-    // UPDATES SCORES EVERY 5 SECONDS
-    setInterval(function(){
+    function scoresGetter(){
         $.ajax({
             type: 'GET',
             url: fixturesList.dataset.url,
@@ -249,11 +248,19 @@ $(function(){
                 console.log('err')
             }
         });
-    }, 5000);
+    }
+
+
+
+    // UPDATES SCORES EVERY 5 SECONDS
+    setInterval(scoresGetter(), 5000);
 
 
     
-    
+    // AJAX TESTER
+    $('#getpres').click(function(){
+        scoresGetter();
+    })
     
     
     
