@@ -259,6 +259,7 @@ $(function(){
     
     // AJAX TESTER
     $('#getpres').click(function(){
+        alert(fixturesList, 'fixtures');
         scoresGetter();
     })
     
