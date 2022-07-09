@@ -227,7 +227,7 @@ $(function(){
             type: 'GET',
             url: fixturesList.dataset.url,
             success: function(response){
-                console.log('response' ,response)
+                alert('response' ,response)
                 $('#fixtures-list').each(function(){
 
                     $(this).find('span').each(function(){
@@ -253,7 +253,7 @@ $(function(){
 
 
     // UPDATES SCORES EVERY 5 SECONDS
-    setInterval(scoresGetter(), 5000);
+    // setInterval(scoresGetter(), 5000);
 
 
     
