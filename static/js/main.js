@@ -253,7 +253,8 @@ $(function(){
 
 
     // UPDATES SCORES EVERY 5 SECONDS
-    // setInterval(scoresGetter(), 5000);
+     setInterval(function(){
+           scoresGetter(), 5000});
 
 
     
