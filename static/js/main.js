@@ -227,7 +227,7 @@ $(function(){
             type: 'GET',
             url: fixturesList.dataset.url,
             success: function(response){
-                alert('response' ,response)
+                console.log('response' ,response)
                 $('#fixtures-list').each(function(){
 
                     $(this).find('span').each(function(){
@@ -260,7 +260,7 @@ $(function(){
     
     // AJAX TESTER
     $('#getpres').click(function(){
-        alert(fixturesList, 'fixtures');
+        alert(fixturesList, fixturesList.dataset.url, 'fixtures');
         scoresGetter();
     })
     
