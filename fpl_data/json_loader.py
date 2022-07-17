@@ -85,7 +85,7 @@ class StartSchedule:
 
 
 def scores_data():
-    with open(pwd + '/json_data/fpl_data.txt','r') as f:
+    with open(pwd + '/json_data/fpl_data.json','r') as f:
         raw_str = f.read()
     data = json.loads(raw_str)
     return data

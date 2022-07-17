@@ -20,8 +20,8 @@
                 "date": "2022-07-07T15:00:00+00:00",
                 "timestamp": 1657206000,
                 "periods": {
-                    "first": null,
-                    "second": null
+                    "first": 1657206000,
+                    "second": 1657209600
                 },
                 "venue": {
                     "id": 121,
@@ -29,9 +29,9 @@
                     "city": "Yerevan"
                 },
                 "status": {
-                    "long": "Not Started",
-                    "short": "NS",
-                    "elapsed": null
+                    "long": "Match Finished",
+                    "short": "FT",
+                    "elapsed": 90
                 }
             },
             "league": {
@@ -48,27 +48,27 @@
                     "id": 582,
                     "name": "Alashkert",
                     "logo": "https://media.api-sports.io/football/teams/582.png",
-                    "winner": null
+                    "winner": true
                 },
                 "away": {
                     "id": 4626,
                     "name": "Hamrun Spartans",
                     "logo": "https://media.api-sports.io/football/teams/4626.png",
-                    "winner": null
+                    "winner": false
                 }
             },
             "goals": {
-                "home": null,
-                "away": null
+                "home": 1,
+                "away": 0
             },
             "score": {
                 "halftime": {
-                    "home": null,
-                    "away": null
+                    "home": 1,
+                    "away": 0
                 },
                 "fulltime": {
-                    "home": null,
-                    "away": null
+                    "home": 1,
+                    "away": 0
                 },
                 "extratime": {
                     "home": null,
@@ -83,13 +83,13 @@
         {
             "fixture": {
                 "id": 867305,
-                "referee": "V. Banari",
+                "referee": "Banari Veaceslav,",
                 "timezone": "UTC",
                 "date": "2022-07-07T15:00:00+00:00",
                 "timestamp": 1657206000,
                 "periods": {
-                    "first": null,
-                    "second": null
+                    "first": 1657206000,
+                    "second": 1657209600
                 },
                 "venue": {
                     "id": 2618,
@@ -97,9 +97,9 @@
                     "city": "Andorra la Vella"
                 },
                 "status": {
-                    "long": "Not Started",
-                    "short": "NS",
-                    "elapsed": null
+                    "long": "Match Finished",
+                    "short": "FT",
+                    "elapsed": 90
                 }
             },
             "league": {
@@ -116,27 +116,27 @@
                     "id": 703,
                     "name": "UE Santa Coloma",
                     "logo": "https://media.api-sports.io/football/teams/703.png",
-                    "winner": null
+                    "winner": false
                 },
                 "away": {
                     "id": 276,
                     "name": "Breidablik",
                     "logo": "https://media.api-sports.io/football/teams/276.png",
-                    "winner": null
+                    "winner": true
                 }
             },
             "goals": {
-                "home": null,
-                "away": null
+                "home": 0,
+                "away": 1
             },
             "score": {
                 "halftime": {
-                    "home": null,
-                    "away": null
+                    "home": 0,
+                    "away": 1
                 },
                 "fulltime": {
-                    "home": null,
-                    "away": null
+                    "home": 0,
+                    "away": 1
                 },
                 "extratime": {
                     "home": null,
@@ -151,13 +151,13 @@
         {
             "fixture": {
                 "id": 867283,
-                "referee": "M. Zebec",
+                "referee": "Mario Zebec, Croatia",
                 "timezone": "UTC",
                 "date": "2022-07-07T16:00:00+00:00",
                 "timestamp": 1657209600,
                 "periods": {
-                    "first": null,
-                    "second": null
+                    "first": 1657209600,
+                    "second": 1657213200
                 },
                 "venue": {
                     "id": 11572,
@@ -165,9 +165,9 @@
                     "city": "Panev\u0117\u017eys"
                 },
                 "status": {
-                    "long": "Not Started",
-                    "short": "NS",
-                    "elapsed": null
+                    "long": "Match Finished",
+                    "short": "FT",
+                    "elapsed": 90
                 }
             },
             "league": {
@@ -194,17 +194,17 @@
                 }
             },
             "goals": {
-                "home": null,
-                "away": null
+                "home": 0,
+                "away": 0
             },
             "score": {
                 "halftime": {
-                    "home": null,
-                    "away": null
+                    "home": 0,
+                    "away": 0
                 },
                 "fulltime": {
-                    "home": null,
-                    "away": null
+                    "home": 0,
+                    "away": 0
                 },
                 "extratime": {
                     "home": null,
@@ -219,23 +219,23 @@
         {
             "fixture": {
                 "id": 867291,
-                "referee": "L. Cibelli",
+                "referee": "Luca Cibelli, Switzerland",
                 "timezone": "UTC",
                 "date": "2022-07-07T16:00:00+00:00",
                 "timestamp": 1657209600,
                 "periods": {
-                    "first": null,
-                    "second": null
+                    "first": 1657209600,
+                    "second": 1657213200
                 },
                 "venue": {
                     "id": 12286,
-                    "name": "Kuopion Keskuskent\u00e4n tekonurmi",
+                    "name": "V\u00e4re Areena",
                     "city": "Kuopio"
                 },
                 "status": {
-                    "long": "Not Started",
-                    "short": "NS",
-                    "elapsed": null
+                    "long": "Match Finished",
+                    "short": "FT",
+                    "elapsed": 90
                 }
             },
             "league": {
@@ -252,27 +252,27 @@
                     "id": 1165,
                     "name": "KuPS",
                     "logo": "https://media.api-sports.io/football/teams/1165.png",
-                    "winner": null
+                    "winner": true
                 },
                 "away": {
                     "id": 3499,
                     "name": "Dila",
                     "logo": "https://media.api-sports.io/football/teams/3499.png",
-                    "winner": null
+                    "winner": false
                 }
             },
             "goals": {
-                "home": null,
-                "away": null
+                "home": 2,
+                "away": 0
             },
             "score": {
                 "halftime": {
-                    "home": null,
-                    "away": null
+                    "home": 1,
+                    "away": 0
                 },
                 "fulltime": {
-                    "home": null,
-                    "away": null
+                    "home": 2,
+                    "away": 0
                 },
                 "extratime": {
                     "home": null,
@@ -287,13 +287,13 @@
         {
             "fixture": {
                 "id": 867299,
-                "referee": "R. Cabarov",
+                "referee": "Rauf Jabarov,",
                 "timezone": "UTC",
                 "date": "2022-07-07T16:00:00+00:00",
                 "timestamp": 1657209600,
                 "periods": {
-                    "first": null,
-                    "second": null
+                    "first": 1657209600,
+                    "second": 1657213200
                 },
                 "venue": {
                     "id": 2194,
@@ -301,9 +301,9 @@
                     "city": "Modri\u010da"
                 },
                 "status": {
-                    "long": "Not Started",
-                    "short": "NS",
-                    "elapsed": null
+                    "long": "Match Finished",
+                    "short": "FT",
+                    "elapsed": 90
                 }
             },
             "league": {
@@ -320,27 +320,27 @@
                     "id": 3364,
                     "name": "Borac Banja Luka",
                     "logo": "https://media.api-sports.io/football/teams/3364.png",
-                    "winner": null
+                    "winner": true
                 },
                 "away": {
                     "id": 678,
                     "name": "B36 Torshavn",
                     "logo": "https://media.api-sports.io/football/teams/678.png",
-                    "winner": null
+                    "winner": false
                 }
             },
             "goals": {
-                "home": null,
-                "away": null
+                "home": 2,
+                "away": 0
             },
             "score": {
                 "halftime": {
-                    "home": null,
-                    "away": null
+                    "home": 1,
+                    "away": 0
                 },
                 "fulltime": {
-                    "home": null,
-                    "away": null
+                    "home": 2,
+                    "away": 0
                 },
                 "extratime": {
                     "home": null,
@@ -360,8 +360,8 @@
                 "date": "2022-07-07T16:00:00+00:00",
                 "timestamp": 1657209600,
                 "periods": {
-                    "first": null,
-                    "second": null
+                    "first": 1657209600,
+                    "second": 1657213200
                 },
                 "venue": {
                     "id": 2301,
@@ -369,9 +369,9 @@
                     "city": "Gori"
                 },
                 "status": {
-                    "long": "Not Started",
-                    "short": "NS",
-                    "elapsed": null
+                    "long": "Match Finished",
+                    "short": "FT",
+                    "elapsed": 90
                 }
             },
             "league": {
@@ -388,27 +388,27 @@
                     "id": 3502,
                     "name": "Saburtalo",
                     "logo": "https://media.api-sports.io/football/teams/3502.png",
-                    "winner": null
+                    "winner": false
                 },
                 "away": {
                     "id": 708,
                     "name": "Partizani",
                     "logo": "https://media.api-sports.io/football/teams/708.png",
-                    "winner": null
+                    "winner": true
                 }
             },
             "goals": {
-                "home": null,
-                "away": null
+                "home": 0,
+                "away": 1
             },
             "score": {
                 "halftime": {
-                    "home": null,
-                    "away": null
+                    "home": 0,
+                    "away": 0
                 },
                 "fulltime": {
-                    "home": null,
-                    "away": null
+                    "home": 0,
+                    "away": 1
                 },
                 "extratime": {
                     "home": null,
@@ -423,13 +423,13 @@
         {
             "fixture": {
                 "id": 867325,
-                "referee": "E. Hamiti",
+                "referee": "Eldorjan Hamiti, Albania",
                 "timezone": "UTC",
                 "date": "2022-07-07T16:00:00+00:00",
                 "timestamp": 1657209600,
                 "periods": {
-                    "first": null,
-                    "second": null
+                    "first": 1657209600,
+                    "second": 1657213200
                 },
                 "venue": {
                     "id": 1256,
@@ -437,9 +437,9 @@
                     "city": "Szczecin"
                 },
                 "status": {
-                    "long": "Not Started",
-                    "short": "NS",
-                    "elapsed": null
+                    "long": "Match Finished",
+                    "short": "FT",
+                    "elapsed": 90
                 }
             },
             "league": {
@@ -456,27 +456,27 @@
                     "id": 348,
                     "name": "Pogon Szczecin",
                     "logo": "https://media.api-sports.io/football/teams/348.png",
-                    "winner": null
+                    "winner": true
                 },
                 "away": {
                     "id": 271,
                     "name": "KR Reykjavik",
                     "logo": "https://media.api-sports.io/football/teams/271.png",
-                    "winner": null
+                    "winner": false
                 }
             },
             "goals": {
-                "home": null,
-                "away": null
+                "home": 4,
+                "away": 1
             },
             "score": {
                 "halftime": {
-                    "home": null,
-                    "away": null
+                    "home": 3,
+                    "away": 0
                 },
                 "fulltime": {
-                    "home": null,
-                    "away": null
+                    "home": 4,
+                    "away": 1
                 },
                 "extratime": {
                     "home": null,
@@ -496,8 +496,8 @@
                 "date": "2022-07-07T16:00:00+00:00",
                 "timestamp": 1657209600,
                 "periods": {
-                    "first": null,
-                    "second": null
+                    "first": 1657209600,
+                    "second": 1657213200
                 },
                 "venue": {
                     "id": 760,
@@ -505,9 +505,9 @@
                     "city": "Gibraltar"
                 },
                 "status": {
-                    "long": "Not Started",
-                    "short": "NS",
-                    "elapsed": null
+                    "long": "Match Finished",
+                    "short": "FT",
+                    "elapsed": 90
                 }
             },
             "league": {
@@ -524,27 +524,27 @@
                     "id": 16135,
                     "name": "Magpies",
                     "logo": "https://media.api-sports.io/football/teams/16135.png",
-                    "winner": null
+                    "winner": true
                 },
                 "away": {
                     "id": 697,
                     "name": "Crusaders FC",
                     "logo": "https://media.api-sports.io/football/teams/697.png",
-                    "winner": null
+                    "winner": false
                 }
             },
             "goals": {
-                "home": null,
-                "away": null
+                "home": 2,
+                "away": 1
             },
             "score": {
                 "halftime": {
-                    "home": null,
-                    "away": null
+                    "home": 1,
+                    "away": 0
                 },
                 "fulltime": {
-                    "home": null,
-                    "away": null
+                    "home": 2,
+                    "away": 1
                 },
                 "extratime": {
                     "home": null,
@@ -559,13 +559,13 @@
         {
             "fixture": {
                 "id": 867331,
-                "referee": "L. Luki\u0107",
+                "referee": "Lazar Lukic, Serbia",
                 "timezone": "UTC",
                 "date": "2022-07-07T16:00:00+00:00",
                 "timestamp": 1657209600,
                 "periods": {
-                    "first": null,
-                    "second": null
+                    "first": 1657209600,
+                    "second": 1657213200
                 },
                 "venue": {
                     "id": 605,
@@ -573,9 +573,9 @@
                     "city": "Tallinn"
                 },
                 "status": {
-                    "long": "Not Started",
-                    "short": "NS",
-                    "elapsed": null
+                    "long": "Match Finished",
+                    "short": "FT",
+                    "elapsed": 90
                 }
             },
             "league": {
@@ -592,27 +592,27 @@
                     "id": 687,
                     "name": "Flora Tallinn",
                     "logo": "https://media.api-sports.io/football/teams/687.png",
-                    "winner": null
+                    "winner": true
                 },
                 "away": {
                     "id": 689,
                     "name": "SJK",
                     "logo": "https://media.api-sports.io/football/teams/689.png",
-                    "winner": null
+                    "winner": false
                 }
             },
             "goals": {
-                "home": null,
-                "away": null
+                "home": 1,
+                "away": 0
             },
             "score": {
                 "halftime": {
-                    "home": null,
-                    "away": null
+                    "home": 1,
+                    "away": 0
                 },
                 "fulltime": {
-                    "home": null,
-                    "away": null
+                    "home": 1,
+                    "away": 0
                 },
                 "extratime": {
                     "home": null,
@@ -632,8 +632,8 @@
                 "date": "2022-07-07T16:30:00+00:00",
                 "timestamp": 1657211400,
                 "periods": {
-                    "first": null,
-                    "second": null
+                    "first": 1657211400,
+                    "second": 1657215000
                 },
                 "venue": {
                     "id": 2354,
@@ -641,9 +641,9 @@
                     "city": "Ru\u017eomberok"
                 },
                 "status": {
-                    "long": "Not Started",
-                    "short": "NS",
-                    "elapsed": null
+                    "long": "Match Finished",
+                    "short": "FT",
+                    "elapsed": 90
                 }
             },
             "league": {
@@ -660,27 +660,27 @@
                     "id": 3549,
                     "name": "Ru\u017eomberok",
                     "logo": "https://media.api-sports.io/football/teams/3549.png",
-                    "winner": null
+                    "winner": true
                 },
                 "away": {
                     "id": 3872,
                     "name": "Kauno \u017dalgiris",
                     "logo": "https://media.api-sports.io/football/teams/3872.png",
-                    "winner": null
+                    "winner": false
                 }
             },
             "goals": {
-                "home": null,
-                "away": null
+                "home": 2,
+                "away": 0
             },
             "score": {
                 "halftime": {
-                    "home": null,
-                    "away": null
+                    "home": 1,
+                    "away": 0
                 },
                 "fulltime": {
-                    "home": null,
-                    "away": null
+                    "home": 2,
+                    "away": 0
                 },
                 "extratime": {
                     "home": null,
@@ -700,8 +700,8 @@
                 "date": "2022-07-07T17:00:00+00:00",
                 "timestamp": 1657213200,
                 "periods": {
-                    "first": null,
-                    "second": null
+                    "first": 1657213200,
+                    "second": 1657216800
                 },
                 "venue": {
                     "id": 691,
@@ -709,9 +709,9 @@
                     "city": "Tbilisi"
                 },
                 "status": {
-                    "long": "Not Started",
-                    "short": "NS",
-                    "elapsed": null
+                    "long": "Match Finished",
+                    "short": "FT",
+                    "elapsed": 90
                 }
             },
             "league": {
@@ -728,27 +728,27 @@
                     "id": 2262,
                     "name": "Dinamo Tbilisi",
                     "logo": "https://media.api-sports.io/football/teams/2262.png",
-                    "winner": null
+                    "winner": false
                 },
                 "away": {
                     "id": 3528,
                     "name": "Paide",
                     "logo": "https://media.api-sports.io/football/teams/3528.png",
-                    "winner": null
+                    "winner": true
                 }
             },
             "goals": {
-                "home": null,
-                "away": null
+                "home": 2,
+                "away": 3
             },
             "score": {
                 "halftime": {
-                    "home": null,
-                    "away": null
+                    "home": 1,
+                    "away": 0
                 },
                 "fulltime": {
-                    "home": null,
-                    "away": null
+                    "home": 2,
+                    "away": 3
                 },
                 "extratime": {
                     "home": null,
@@ -763,13 +763,13 @@
         {
             "fixture": {
                 "id": 867289,
-                "referee": "V. Spasjo\u0146\u0146ikovs",
+                "referee": "Vitalijs Spasjonnikovs, Latvia",
                 "timezone": "UTC",
                 "date": "2022-07-07T17:00:00+00:00",
                 "timestamp": 1657213200,
                 "periods": {
-                    "first": null,
-                    "second": null
+                    "first": 1657213200,
+                    "second": 1657216800
                 },
                 "venue": {
                     "id": 2615,
@@ -777,9 +777,9 @@
                     "city": "Chi\u015fin\u0103u"
                 },
                 "status": {
-                    "long": "Not Started",
-                    "short": "NS",
-                    "elapsed": null
+                    "long": "Match Finished",
+                    "short": "FT",
+                    "elapsed": 90
                 }
             },
             "league": {
@@ -796,27 +796,27 @@
                     "id": 4632,
                     "name": "Sf\u00eentul Gheorghe",
                     "logo": "https://media.api-sports.io/football/teams/4632.png",
-                    "winner": null
+                    "winner": false
                 },
                 "away": {
                     "id": 4197,
                     "name": "Mura",
                     "logo": "https://media.api-sports.io/football/teams/4197.png",
-                    "winner": null
+                    "winner": true
                 }
             },
             "goals": {
-                "home": null,
-                "away": null
+                "home": 1,
+                "away": 2
             },
             "score": {
                 "halftime": {
-                    "home": null,
-                    "away": null
+                    "home": 0,
+                    "away": 0
                 },
                 "fulltime": {
-                    "home": null,
-                    "away": null
+                    "home": 1,
+                    "away": 2
                 },
                 "extratime": {
                     "home": null,
@@ -831,13 +831,13 @@
         {
             "fixture": {
                 "id": 867301,
-                "referee": "M. Balakin",
+                "referee": "Mykola Balakin, Ukraine",
                 "timezone": "UTC",
                 "date": "2022-07-07T17:00:00+00:00",
                 "timestamp": 1657213200,
                 "periods": {
-                    "first": null,
-                    "second": null
+                    "first": 1657213200,
+                    "second": 1657216800
                 },
                 "venue": {
                     "id": 1442,
@@ -845,9 +845,9 @@
                     "city": "Ljubljana"
                 },
                 "status": {
-                    "long": "Not Started",
-                    "short": "NS",
-                    "elapsed": null
+                    "long": "Match Finished",
+                    "short": "FT",
+                    "elapsed": 90
                 }
             },
             "league": {
@@ -874,17 +874,17 @@
                 }
             },
             "goals": {
-                "home": null,
-                "away": null
+                "home": 1,
+                "away": 1
             },
             "score": {
                 "halftime": {
-                    "home": null,
-                    "away": null
+                    "home": 0,
+                    "away": 1
                 },
                 "fulltime": {
-                    "home": null,
-                    "away": null
+                    "home": 1,
+                    "away": 1
                 },
                 "extratime": {
                     "home": null,
@@ -899,13 +899,13 @@
         {
             "fixture": {
                 "id": 867323,
-                "referee": "P. Orel",
+                "referee": "Pavel Orel, Czech Republic",
                 "timezone": "UTC",
                 "date": "2022-07-07T17:00:00+00:00",
                 "timestamp": 1657213200,
                 "periods": {
-                    "first": null,
-                    "second": null
+                    "first": 1657213200,
+                    "second": 1657216800
                 },
                 "venue": {
                     "id": 1067,
@@ -913,9 +913,9 @@
                     "city": "Ta'Qali"
                 },
                 "status": {
-                    "long": "Not Started",
-                    "short": "NS",
-                    "elapsed": null
+                    "long": "Match Finished",
+                    "short": "FT",
+                    "elapsed": 90
                 }
             },
             "league": {
@@ -942,17 +942,17 @@
                 }
             },
             "goals": {
-                "home": null,
-                "away": null
+                "home": 0,
+                "away": 0
             },
             "score": {
                 "halftime": {
-                    "home": null,
-                    "away": null
+                    "home": 0,
+                    "away": 0
                 },
                 "fulltime": {
-                    "home": null,
-                    "away": null
+                    "home": 0,
+                    "away": 0
                 },
                 "extratime": {
                     "home": null,
@@ -967,13 +967,13 @@
         {
             "fixture": {
                 "id": 867285,
-                "referee": "A. Durieux",
+                "referee": "Alain Durieux, Luxembourg",
                 "timezone": "UTC",
                 "date": "2022-07-07T18:00:00+00:00",
                 "timestamp": 1657216800,
                 "periods": {
-                    "first": null,
-                    "second": null
+                    "first": 1657216800,
+                    "second": 1657220400
                 },
                 "venue": {
                     "id": 2,
@@ -981,9 +981,9 @@
                     "city": "Elbasan"
                 },
                 "status": {
-                    "long": "Not Started",
-                    "short": "NS",
-                    "elapsed": null
+                    "long": "Match Finished",
+                    "short": "FT",
+                    "elapsed": 90
                 }
             },
             "league": {
@@ -1010,17 +1010,17 @@
                 }
             },
             "goals": {
-                "home": null,
-                "away": null
+                "home": 0,
+                "away": 0
             },
             "score": {
                 "halftime": {
-                    "home": null,
-                    "away": null
+                    "home": 0,
+                    "away": 0
                 },
                 "fulltime": {
-                    "home": null,
-                    "away": null
+                    "home": 0,
+                    "away": 0
                 },
                 "extratime": {
                     "home": null,
@@ -1040,18 +1040,18 @@
                 "date": "2022-07-07T18:00:00+00:00",
                 "timestamp": 1657216800,
                 "periods": {
-                    "first": null,
-                    "second": null
+                    "first": 1657216800,
+                    "second": 1657220400
                 },
                 "venue": {
                     "id": null,
-                    "name": "Stadiumi Fadil Vokrri",
-                    "city": "Pristina"
+                    "name": "Stadiumi i Qytetit",
+                    "city": "Gjilan\u00eb"
                 },
                 "status": {
-                    "long": "Not Started",
-                    "short": "NS",
-                    "elapsed": null
+                    "long": "Match Finished",
+                    "short": "FT",
+                    "elapsed": 90
                 }
             },
             "league": {
@@ -1068,27 +1068,27 @@
                     "id": 12772,
                     "name": "Gjilani",
                     "logo": "https://media.api-sports.io/football/teams/12772.png",
-                    "winner": null
+                    "winner": true
                 },
                 "away": {
                     "id": 661,
                     "name": "FK Liepaja",
                     "logo": "https://media.api-sports.io/football/teams/661.png",
-                    "winner": null
+                    "winner": false
                 }
             },
             "goals": {
-                "home": null,
-                "away": null
+                "home": 1,
+                "away": 0
             },
             "score": {
                 "halftime": {
-                    "home": null,
-                    "away": null
+                    "home": 1,
+                    "away": 0
                 },
                 "fulltime": {
-                    "home": null,
-                    "away": null
+                    "home": 1,
+                    "away": 0
                 },
                 "extratime": {
                     "home": null,
@@ -1108,8 +1108,8 @@
                 "date": "2022-07-07T18:00:00+00:00",
                 "timestamp": 1657216800,
                 "periods": {
-                    "first": null,
-                    "second": null
+                    "first": 1657216800,
+                    "second": 1657220400
                 },
                 "venue": {
                     "id": 1684,
@@ -1117,9 +1117,9 @@
                     "city": "Oswestry / Croesoswallt, Shropshire"
                 },
                 "status": {
-                    "long": "Not Started",
-                    "short": "NS",
-                    "elapsed": null
+                    "long": "Match Finished",
+                    "short": "FT",
+                    "elapsed": 90
                 }
             },
             "league": {
@@ -1136,27 +1136,27 @@
                     "id": 352,
                     "name": "Bala Town",
                     "logo": "https://media.api-sports.io/football/teams/352.png",
-                    "winner": null
+                    "winner": false
                 },
                 "away": {
                     "id": 3842,
                     "name": "Sligo Rovers",
                     "logo": "https://media.api-sports.io/football/teams/3842.png",
-                    "winner": null
+                    "winner": true
                 }
             },
             "goals": {
-                "home": null,
-                "away": null
+                "home": 1,
+                "away": 2
             },
             "score": {
                 "halftime": {
-                    "home": null,
-                    "away": null
+                    "home": 1,
+                    "away": 1
                 },
                 "fulltime": {
-                    "home": null,
-                    "away": null
+                    "home": 1,
+                    "away": 2
                 },
                 "extratime": {
                     "home": null,
@@ -1176,18 +1176,18 @@
                 "date": "2022-07-07T18:00:00+00:00",
                 "timestamp": 1657216800,
                 "periods": {
-                    "first": null,
-                    "second": null
+                    "first": 1657216800,
+                    "second": 1657220400
                 },
                 "venue": {
-                    "id": 1360,
+                    "id": null,
                     "name": "Stade \u00c9mile Mayrisch",
                     "city": "Esch-sur-Alzette"
                 },
                 "status": {
-                    "long": "Not Started",
-                    "short": "NS",
-                    "elapsed": null
+                    "long": "Match Finished",
+                    "short": "FT",
+                    "elapsed": 90
                 }
             },
             "league": {
@@ -1204,27 +1204,27 @@
                     "id": 626,
                     "name": "Fola Esch",
                     "logo": "https://media.api-sports.io/football/teams/626.png",
-                    "winner": null
+                    "winner": false
                 },
                 "away": {
                     "id": 2260,
                     "name": "Tre Fiori",
                     "logo": "https://media.api-sports.io/football/teams/2260.png",
-                    "winner": null
+                    "winner": true
                 }
             },
             "goals": {
-                "home": null,
-                "away": null
+                "home": 0,
+                "away": 1
             },
             "score": {
                 "halftime": {
-                    "home": null,
-                    "away": null
+                    "home": 0,
+                    "away": 0
                 },
                 "fulltime": {
-                    "home": null,
-                    "away": null
+                    "home": 0,
+                    "away": 1
                 },
                 "extratime": {
                     "home": null,
@@ -1239,13 +1239,13 @@
         {
             "fixture": {
                 "id": 867315,
-                "referee": "J. Pignard",
+                "referee": "Jeremie Pignard, France",
                 "timezone": "UTC",
                 "date": "2022-07-07T18:00:00+00:00",
                 "timestamp": 1657216800,
                 "periods": {
-                    "first": null,
-                    "second": null
+                    "first": 1657216800,
+                    "second": 1657220400
                 },
                 "venue": {
                     "id": 2532,
@@ -1253,9 +1253,9 @@
                     "city": "Podgorica"
                 },
                 "status": {
-                    "long": "Not Started",
-                    "short": "NS",
-                    "elapsed": null
+                    "long": "Match Finished",
+                    "short": "FT",
+                    "elapsed": 90
                 }
             },
             "league": {
@@ -1282,17 +1282,17 @@
                 }
             },
             "goals": {
-                "home": null,
-                "away": null
+                "home": 1,
+                "away": 1
             },
             "score": {
                 "halftime": {
-                    "home": null,
-                    "away": null
+                    "home": 1,
+                    "away": 1
                 },
                 "fulltime": {
-                    "home": null,
-                    "away": null
+                    "home": 1,
+                    "away": 1
                 },
                 "extratime": {
                     "home": null,
@@ -1307,13 +1307,13 @@
         {
             "fixture": {
                 "id": 867321,
-                "referee": "L. F\u00e4hndrich",
+                "referee": "Lukas Fahndrich, Switzerland",
                 "timezone": "UTC",
                 "date": "2022-07-07T18:00:00+00:00",
                 "timestamp": 1657216800,
                 "periods": {
-                    "first": null,
-                    "second": null
+                    "first": 1657216800,
+                    "second": 1657220400
                 },
                 "venue": {
                     "id": 1045,
@@ -1321,9 +1321,9 @@
                     "city": "Skopje"
                 },
                 "status": {
-                    "long": "Not Started",
-                    "short": "NS",
-                    "elapsed": null
+                    "long": "Match Finished",
+                    "short": "FT",
+                    "elapsed": 90
                 }
             },
             "league": {
@@ -1340,27 +1340,27 @@
                     "id": 609,
                     "name": "Shkendija",
                     "logo": "https://media.api-sports.io/football/teams/609.png",
-                    "winner": null
+                    "winner": true
                 },
                 "away": {
                     "id": 3682,
                     "name": "Ararat",
                     "logo": "https://media.api-sports.io/football/teams/3682.png",
-                    "winner": null
+                    "winner": false
                 }
             },
             "goals": {
-                "home": null,
-                "away": null
+                "home": 2,
+                "away": 0
             },
             "score": {
                 "halftime": {
-                    "home": null,
-                    "away": null
+                    "home": 2,
+                    "away": 0
                 },
                 "fulltime": {
-                    "home": null,
-                    "away": null
+                    "home": 2,
+                    "away": 0
                 },
                 "extratime": {
                     "home": null,
@@ -1375,13 +1375,13 @@
         {
             "fixture": {
                 "id": 867327,
-                "referee": "R. Valikonis",
+                "referee": "Robertas Valikonis, Lithuania",
                 "timezone": "UTC",
                 "date": "2022-07-07T18:00:00+00:00",
                 "timestamp": 1657216800,
                 "periods": {
-                    "first": null,
-                    "second": null
+                    "first": 1657216800,
+                    "second": 1657220400
                 },
                 "venue": {
                     "id": 609,
@@ -1389,9 +1389,9 @@
                     "city": "T\u00f3rshavn, Streymoy"
                 },
                 "status": {
-                    "long": "Not Started",
-                    "short": "NS",
-                    "elapsed": null
+                    "long": "Match Finished",
+                    "short": "FT",
+                    "elapsed": 90
                 }
             },
             "league": {
@@ -1408,27 +1408,27 @@
                     "id": 4133,
                     "name": "HB",
                     "logo": "https://media.api-sports.io/football/teams/4133.png",
-                    "winner": null
+                    "winner": true
                 },
                 "away": {
                     "id": 358,
                     "name": "Newtown AFC",
                     "logo": "https://media.api-sports.io/football/teams/358.png",
-                    "winner": null
+                    "winner": false
                 }
             },
             "goals": {
-                "home": null,
-                "away": null
+                "home": 1,
+                "away": 0
             },
             "score": {
                 "halftime": {
-                    "home": null,
-                    "away": null
+                    "home": 0,
+                    "away": 0
                 },
                 "fulltime": {
-                    "home": null,
-                    "away": null
+                    "home": 1,
+                    "away": 0
                 },
                 "extratime": {
                     "home": null,
@@ -1443,23 +1443,23 @@
         {
             "fixture": {
                 "id": 867277,
-                "referee": "N. Laforge",
+                "referee": "Nicolas Laforge, Belgium",
                 "timezone": "UTC",
                 "date": "2022-07-07T18:15:00+00:00",
                 "timestamp": 1657217700,
                 "periods": {
-                    "first": null,
-                    "second": null
+                    "first": 1657217700,
+                    "second": 1657221300
                 },
                 "venue": {
-                    "id": null,
+                    "id": 18627,
                     "name": "Polsat Plus Arena Gda\u0144sk",
                     "city": "Gda\u0144sk"
                 },
                 "status": {
-                    "long": "Not Started",
-                    "short": "NS",
-                    "elapsed": null
+                    "long": "Match Finished",
+                    "short": "FT",
+                    "elapsed": 90
                 }
             },
             "league": {
@@ -1476,27 +1476,27 @@
                     "id": 343,
                     "name": "Lechia Gdansk",
                     "logo": "https://media.api-sports.io/football/teams/343.png",
-                    "winner": null
+                    "winner": true
                 },
                 "away": {
                     "id": 4194,
                     "name": "Akademija Pandev",
                     "logo": "https://media.api-sports.io/football/teams/4194.png",
-                    "winner": null
+                    "winner": false
                 }
             },
             "goals": {
-                "home": null,
-                "away": null
+                "home": 4,
+                "away": 1
             },
             "score": {
                 "halftime": {
-                    "home": null,
-                    "away": null
+                    "home": 3,
+                    "away": 0
                 },
                 "fulltime": {
-                    "home": null,
-                    "away": null
+                    "home": 4,
+                    "away": 1
                 },
                 "extratime": {
                     "home": null,
@@ -1511,13 +1511,13 @@
         {
             "fixture": {
                 "id": 867295,
-                "referee": "F. San",
+                "referee": "Fedayi San, Switzerland",
                 "timezone": "UTC",
                 "date": "2022-07-07T18:30:00+00:00",
                 "timestamp": 1657218600,
                 "periods": {
-                    "first": null,
-                    "second": null
+                    "first": 1657218600,
+                    "second": 1657222200
                 },
                 "venue": {
                     "id": 1095,
@@ -1525,9 +1525,9 @@
                     "city": "Podgorica"
                 },
                 "status": {
-                    "long": "Not Started",
-                    "short": "NS",
-                    "elapsed": null
+                    "long": "Match Finished",
+                    "short": "FT",
+                    "elapsed": 90
                 }
             },
             "league": {
@@ -1544,27 +1544,27 @@
                     "id": 579,
                     "name": "Buducnost Podgorica",
                     "logo": "https://media.api-sports.io/football/teams/579.png",
-                    "winner": null
+                    "winner": true
                 },
                 "away": {
                     "id": 14395,
                     "name": "Llapi",
                     "logo": "https://media.api-sports.io/football/teams/14395.png",
-                    "winner": null
+                    "winner": false
                 }
             },
             "goals": {
-                "home": null,
-                "away": null
+                "home": 2,
+                "away": 0
             },
             "score": {
                 "halftime": {
-                    "home": null,
-                    "away": null
+                    "home": 2,
+                    "away": 0
                 },
                 "fulltime": {
-                    "home": null,
-                    "away": null
+                    "home": 2,
+                    "away": 0
                 },
                 "extratime": {
                     "home": null,
@@ -1579,13 +1579,13 @@
         {
             "fixture": {
                 "id": 867307,
-                "referee": "Juan Mart\u00ednez",
+                "referee": "Juan Martinez Munuera, Spain",
                 "timezone": "UTC",
                 "date": "2022-07-07T18:30:00+00:00",
                 "timestamp": 1657218600,
                 "periods": {
-                    "first": null,
-                    "second": null
+                    "first": 1657218600,
+                    "second": 1657222200
                 },
                 "venue": {
                     "id": 1436,
@@ -1593,9 +1593,9 @@
                     "city": "Dunajsk\u00e1 Streda"
                 },
                 "status": {
-                    "long": "Not Started",
-                    "short": "NS",
-                    "elapsed": null
+                    "long": "Match Finished",
+                    "short": "FT",
+                    "elapsed": 90
                 }
             },
             "league": {
@@ -1612,27 +1612,27 @@
                     "id": 2257,
                     "name": "Dunajska Streda",
                     "logo": "https://media.api-sports.io/football/teams/2257.png",
-                    "winner": null
+                    "winner": true
                 },
                 "away": {
                     "id": 2266,
                     "name": "Cliftonville FC",
                     "logo": "https://media.api-sports.io/football/teams/2266.png",
-                    "winner": null
+                    "winner": false
                 }
             },
             "goals": {
-                "home": null,
-                "away": null
+                "home": 2,
+                "away": 1
             },
             "score": {
                 "halftime": {
-                    "home": null,
-                    "away": null
+                    "home": 1,
+                    "away": 1
                 },
                 "fulltime": {
-                    "home": null,
-                    "away": null
+                    "home": 2,
+                    "away": 1
                 },
                 "extratime": {
                     "home": null,
@@ -1652,18 +1652,18 @@
                 "date": "2022-07-07T18:45:00+00:00",
                 "timestamp": 1657219500,
                 "periods": {
-                    "first": null,
-                    "second": null
+                    "first": 1657219500,
+                    "second": 1657223100
                 },
                 "venue": {
                     "id": null,
-                    "name": "The Ryan McBride Brandywell Stadium",
-                    "city": "Londonderry"
+                    "name": "Brandywell Stadium",
+                    "city": "Derry"
                 },
                 "status": {
-                    "long": "Not Started",
-                    "short": "NS",
-                    "elapsed": null
+                    "long": "Match Finished",
+                    "short": "FT",
+                    "elapsed": 90
                 }
             },
             "league": {
@@ -1680,27 +1680,27 @@
                     "id": 670,
                     "name": "Derry City",
                     "logo": "https://media.api-sports.io/football/teams/670.png",
-                    "winner": null
+                    "winner": false
                 },
                 "away": {
                     "id": 10124,
                     "name": "Riga",
                     "logo": "https://media.api-sports.io/football/teams/10124.png",
-                    "winner": null
+                    "winner": true
                 }
             },
             "goals": {
-                "home": null,
-                "away": null
+                "home": 0,
+                "away": 2
             },
             "score": {
                 "halftime": {
-                    "home": null,
-                    "away": null
+                    "home": 0,
+                    "away": 1
                 },
                 "fulltime": {
-                    "home": null,
-                    "away": null
+                    "home": 0,
+                    "away": 2
                 },
                 "extratime": {
                     "home": null,
@@ -1720,8 +1720,8 @@
                 "date": "2022-07-07T18:45:00+00:00",
                 "timestamp": 1657219500,
                 "periods": {
-                    "first": null,
-                    "second": null
+                    "first": 1657219500,
+                    "second": 1657223100
                 },
                 "venue": {
                     "id": 2616,
@@ -1729,9 +1729,9 @@
                     "city": "Serravalle"
                 },
                 "status": {
-                    "long": "Not Started",
-                    "short": "NS",
-                    "elapsed": null
+                    "long": "Match Finished",
+                    "short": "FT",
+                    "elapsed": 90
                 }
             },
             "league": {
@@ -1748,27 +1748,27 @@
                     "id": 700,
                     "name": "Tre Penne",
                     "logo": "https://media.api-sports.io/football/teams/700.png",
-                    "winner": null
+                    "winner": false
                 },
                 "away": {
                     "id": 3361,
                     "name": "Tuzla City",
                     "logo": "https://media.api-sports.io/football/teams/3361.png",
-                    "winner": null
+                    "winner": true
                 }
             },
             "goals": {
-                "home": null,
-                "away": null
+                "home": 0,
+                "away": 2
             },
             "score": {
                 "halftime": {
-                    "home": null,
-                    "away": null
+                    "home": 0,
+                    "away": 0
                 },
                 "fulltime": {
-                    "home": null,
-                    "away": null
+                    "home": 0,
+                    "away": 2
                 },
                 "extratime": {
                     "home": null,

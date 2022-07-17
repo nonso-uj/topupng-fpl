@@ -232,6 +232,8 @@ $(function(){
 
                     $(this).find('span').each(function(){
 
+                        console.log($(this).html())
+
                         for(var fixture in response.fixtures){
 
                         if ($(this).attr('id') == response.fixtures[fixture].fixture_id){
