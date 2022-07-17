@@ -66,7 +66,7 @@ def get_scores(request):
                 'link': reverse('predict', args=[game['fixture']['id']])
             })
 
-        fixtures = fixtures[-20:]
+        # fixtures = fixtures[-20:]
         # predictions = serializers.serialize('json', list(predictions))
         return JsonResponse({'fixtures':list(fixtures)})
         # , 'predictions':predictions})
