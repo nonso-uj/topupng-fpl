@@ -254,9 +254,9 @@ $(function(){
 
 
 
-    // UPDATES SCORES EVERY 5 SECONDS
+    // UPDATES SCORES EVERY 30 SECONDS
      setInterval(function(){
-           scoresGetter(), 5000});
+           scoresGetter(), 30000});
 
 
     
