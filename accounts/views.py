@@ -66,6 +66,7 @@ def reg_view(request):
             })
             to_email = form.cleaned_data.get('email')
             # add company email
+            # print(mail_subject, message, settings.EMAIL_HOST_USER, [to_email])
             send_mail(mail_subject, message, settings.EMAIL_HOST_USER, [to_email])
 
             messages.info(request, 'Account registration successfull, Please confirm your email to Login')
