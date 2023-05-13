@@ -39,7 +39,7 @@ class CustomUserCreationForm(UserCreationForm):
         attrs={
             'class':'form-control',
             'placeholder':"Referrers Phone Number*",
-        }))
+        }), required=False)
     password1 = forms.CharField(widget=forms.PasswordInput(
         attrs={
             'class':'form-control mb-3',

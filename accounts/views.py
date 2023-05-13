@@ -12,6 +12,7 @@ from django.core.mail import send_mail
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib import messages
 from django.urls import reverse
+from django.conf import settings
 
 from .models import fplUser
 User = get_user_model()
@@ -65,7 +66,7 @@ def reg_view(request):
             })
             to_email = form.cleaned_data.get('email')
             # add company email
-            send_mail(mail_subject, message, 'nonso.udonne@gmail.com', [to_email])
+            send_mail(mail_subject, message, settings.EMAIL_HOST_USER, [to_email])
 
             messages.info(request, 'Account registration successfull, Please confirm your email to Login')
             return redirect('login')
