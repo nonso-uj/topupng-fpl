@@ -9,7 +9,6 @@
     position: relative;
     margin: 0 0 0 0 !important;
     padding: 0 0 0 0;
-    background-image: "url({% static 'images/hero.jpg' %})";
     background-position: center;
     background-size: cover;
 }
@@ -17,7 +16,7 @@
 
 
 #form-div{
-    height: 75vh;
+    height: 85vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -50,6 +49,8 @@
     position: fixed;
     top: 4rem;
     z-index: 10;
+    background-color: #fff;
+    opacity: 1;
 }
 
 

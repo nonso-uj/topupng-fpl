@@ -89,8 +89,8 @@ WSGI_APPLICATION = 'topupng_fpl.wsgi.application'
 
 load_dotenv(find_dotenv())
 
-DATABASES = {'default': dj_database_url.config(default='sqlite:///db.sqlite3', conn_max_age=600)}
-
+# DATABASES = {'default': dj_database_url.config(default='sqlite:///db.sqlite3', conn_max_age=600)}
+DATABASES = {'default': dj_database_url.parse(config('DATABASE_URL'))}
 
 
 
@@ -129,6 +129,9 @@ USE_L10N = True
 USE_TZ = True
 
 
+import _locale
+_locale._getdefaultlocale = (lambda *args: ['en_US', 'utf8'])
+
 
 
 # Default primary key field type
@@ -145,3 +148,6 @@ AUTH_USER_MODEL = 'accounts.MyUser'
 
 PHONENUMBER_DB_FORMAT = "NATIONAL"
 PHONENUMBER_DEFAULT_REGION = "NG"
+
+
+

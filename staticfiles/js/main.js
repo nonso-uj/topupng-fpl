@@ -222,8 +222,7 @@ $(function(){
 
 
 
-    // UPDATES SCORES EVERY 5 SECONDS
-    setInterval(function(){
+    function scoresGetter(){
         $.ajax({
             type: 'GET',
             url: fixturesList.dataset.url,
@@ -232,6 +231,8 @@ $(function(){
                 $('#fixtures-list').each(function(){
 
                     $(this).find('span').each(function(){
+
+                        console.log($(this).html())
 
                         for(var fixture in response.fixtures){
 
@@ -249,11 +250,20 @@ $(function(){
                 console.log('err')
             }
         });
-    }, 5000000000000000);
+    }
+
+
+
+    // UPDATES SCORES EVERY 30 SECONDS
+     setInterval(function(){scoresGetter()}, 3000);
 
 
     
-    
+    // AJAX TESTER
+    $('#getpres').click(function(){
+        alert(fixturesList, fixturesList.dataset.url, 'fixtures');
+        scoresGetter();
+    })
     
     
     

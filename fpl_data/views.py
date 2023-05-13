@@ -182,6 +182,7 @@ def home_view(request):
     fixtures = []
     games = scores_data()
     league_name = games['response'][0]['league']['name']
+    match_date = games['parameters']['date']
     for game in games['response']:
             if game['goals']['home'] == None or game['goals']['away'] == None:
                 game['goals']['home'] = '0'
@@ -204,7 +205,8 @@ def home_view(request):
         'rusers': rusers,
         'form': form,
         'fixtures': fixtures,
-        'league_name': league_name
+        'league_name': league_name,
+        'match_date': match_date,
     }
     return render(request, 'home.html', context)
 
