@@ -1,12 +1,12 @@
-asgiref==3.7.0
+asgiref==3.8.1
 certifi==2024.8.30
 charset-normalizer==3.4.0
 click==8.1.7
 colorama==0.4.6
 dj-database-url==2.3.0
-Django==3.2.25
+Django==5.1.3
 django-extensions==3.2.3
-django-filter==23.5
+django-filter==24.3
 django-phonenumber-field==8.0.0
 django-storages==1.14.4
 django-utils-six==2.0
@@ -18,7 +18,7 @@ Jinja2==3.1.4
 jmespath==1.0.1
 MarkupSafe==3.0.2
 packaging==24.2
-phonenumberslite==8.13.49
+phonenumberslite==8.13.50
 pillow==11.0.0
 psycopg2-binary==2.9.10
 python-dateutil==2.9.0.post0
