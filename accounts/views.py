@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, logout, authenticate, get_user_model
 from django.template.loader import render_to_string
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
-from django.utils.encoding import force_bytes, force_str, force_text
+from django.utils.encoding import force_bytes, force_str
 from django.contrib.sites.shortcuts import get_current_site
 from .tokens import account_activation_token
 from django.core.mail import send_mail
@@ -58,7 +58,7 @@ def reg_view(request):
             current_site = get_current_site(request)
             mail_subject = 'Activate your account'
             # make better template
-            message = render_to_string('active_email.html', {
+            message = render_to_string('accounts/active_email.html', {
                 'user': user,
                 'domain': current_site.domain,
                 'uid': urlsafe_base64_encode(force_bytes(user.id)),
@@ -75,7 +75,7 @@ def reg_view(request):
     context = {
         'form': form
     }
-    return render(request, 'user-reg.html', context)
+    return render(request, 'accounts/user-reg.html', context)
 
 
 
@@ -84,7 +84,7 @@ def reg_view(request):
 def activate(request, uidb64, token):
     User = get_user_model()
     try:
-        uid = force_text(urlsafe_base64_decode(uidb64))
+        uid = force_str(urlsafe_base64_decode(uidb64))
         user = User.objects.get(pk=uid)
     except(TypeError, ValueError, OverflowError, User.DoesNotExist):
         user = None
@@ -121,7 +121,7 @@ def login_view(request):
 
 
     context = {}
-    return render(request, 'login.html', context)
+    return render(request, 'accounts/login.html', context)
 
 
 

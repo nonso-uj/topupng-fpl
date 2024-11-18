@@ -1,6 +1,6 @@
 from enum import unique
 from django.db import models
-from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
+from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin, Group, Permission
 from phonenumber_field.modelfields import PhoneNumberField
 
 # from django.contrib.auth import get_user_model
@@ -92,6 +92,21 @@ class MyUser(AbstractBaseUser, PermissionsMixin):
     @property
     def is_admin(self):
         return self.admin
+    
+    groups = models.ManyToManyField(
+        Group,
+        related_name="custom_user_set",  # Use a unique related_name
+        blank=True,
+        help_text="The groups this user belongs to.",
+        verbose_name="groups",
+    )
+    user_permissions = models.ManyToManyField(
+        Permission,
+        related_name="custom_user_set_permissions",  # Use a unique related_name
+        blank=True,
+        help_text="Specific permissions for this user.",
+        verbose_name="user permissions",
+    )
 
 
 

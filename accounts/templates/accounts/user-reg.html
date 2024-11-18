@@ -1,0 +1,51 @@
+{% extends 'base/base.html' %}
+
+
+{% block activeReg %} active {% endblock %}
+
+{% block content %}
+
+<div class="container login-container">
+    <div class="row justify-content-center">
+      <div class="col-lg-5 col-md-8 align-item-center">
+        <div class="border border">
+          <h3 class="bg-gray p-4">Register Now</h3>
+          <form action="" method="POST">
+              {% csrf_token %}
+              <fieldset class="p-4">
+
+                {{ form.email }}
+
+                {{ form.first_name }}
+
+                {{ form.last_name }}
+
+                {{ form.phone }}
+                
+                <!-- <input type="number" name="referrer" class="form-control" placeholder="Referrers Phone Number"> -->
+                <div class="form-group mb-3">
+                  {{ form.referrer }}
+                <span class="form-text text-danger">*optional</span>
+                </div>
+                
+
+                {{ form.password1 }}
+
+                {{ form.password2 }}
+
+                <span class="form-text text-danger mt-4">{{form.errors}}</span>
+                
+                <input type="submit" class="btn btn-md font-weight-bold submitBtn mt-3" value="Register Now">
+              
+              </fieldset>
+          </form>
+          <hr>
+          <div class="text-center my-3">
+              <span class="small">Already have an account? <a href="{% url 'login' %}">Login!</a></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}

@@ -32,7 +32,7 @@ def admin_dash(request):
         'fusers': fusers,
         'rusers': rusers
     }
-    return render(request, 'admin-dash.html', context)
+    return render(request, 'fpl_data/admin-dash.html', context)
 
 
 
@@ -208,7 +208,7 @@ def home_view(request):
         'league_name': league_name,
         'match_date': match_date,
     }
-    return render(request, 'home.html', context)
+    return render(request, 'base/home.html', context)
 
 
 
